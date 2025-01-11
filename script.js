@@ -7,6 +7,7 @@ var shortcutscontainer = document.getElementById("shortcuts");
 var addshortcuts = document.getElementById("add");
 const popupbox = document.getElementById("popupbox");
 const popupwindow = document.getElementById("popupwindow");
+const logo = document.getElementById("logo");
 
 radiobutton.forEach(radio => {
     radio.addEventListener('change', () => {
@@ -52,15 +53,16 @@ function changeBackgroundImage() {
 
 }
 
-// Change the background image every 10 seconds
-setInterval(changeBackgroundImage, 10000);
 
 // Initial background image
 changeBackgroundImage();
+// Change the background image every 10 seconds
+setInterval(changeBackgroundImage, 10000);
 
 function engine_selector(engine) {
     switch (engine) {
         case 'google':
+            logo.src = "img/google.png"
             formdetails.action = "https://www.google.com/search";
             user_question.name = "q";
             user_question.placeholder = "Search through google...";
@@ -68,6 +70,7 @@ function engine_selector(engine) {
             searchqueri.value = "";
             break;
         case 'wikipedia':
+            logo.src = "img/wikipedia.png"
             formdetails.action = "https://en.wikipedia.org/w/index.php";
             user_question.name = "search";
             user_question.placeholder = "search through wikipedia page...";
@@ -75,6 +78,7 @@ function engine_selector(engine) {
             searchqueri.value = "Special:Search";
             break;
         case 'bing':
+            logo.src = "img/bing.png"
             formdetails.action = "https://www.bing.com/search";
             user_question.name = "q";
             user_question.placeholder = "Search with Bing...";
@@ -82,6 +86,7 @@ function engine_selector(engine) {
             searchqueri.value = "";
             break;
         case 'duckduckgo':
+            logo.src = "img/duckduckgo.png"
             formdetails.action = "https://duckduckgo.com/";
             user_question.name = "q";
             user_question.placeholder = "Search with DuckDuckGo...";
