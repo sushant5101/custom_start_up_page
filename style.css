@@ -4,37 +4,123 @@
 }
 
 body {
-    height: 100%;
+    height: 100vh;
     width: 100%;
-    background-image: url('img/hotairballon.jpg');
+    overflow: hidden;
+    font-family: sans-serif;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    font-family: sans-serif;
+}
 
+#popupbox {
+    display: none;
+    justify-items: center;
+    position: fixed;
+    background: rgb(1, 1, 1, 0.5);
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+#popupwindow {
+    border: 2px solid gray;
+    width: 30%;
+    height: 30%;
+    background-color: black;
+    margin: 15%;
+    border-radius: 5px;
+}
+
+#input {
+    margin: 10% 10% 0% 10%;
+    text-align: center;
+}
+
+#input label {
+    color: white;
+}
+
+#input input {
+    border: none;
+    border-radius: 5px;
+    height: 25px;
+    outline: none;
+    padding: 1px;
+    font-size: medium;
+    font-weight: 700;
+    width: 200px;
+    margin-bottom: 10%;
+}
+
+#url {
+    margin-left: 3.8%;
+}
+
+#buttons {
+    margin: 0% 30%;
+}
+
+#buttons button {
+    font-size: 0.9rem;
+    font-weight: bold;
+    padding: 1%;
+    margin: 10px;
+    color: rgb(221, 221, 221);
+    border-radius: 4px;
+    border: 1px solid transparent;
+}
+
+#ok {
+    background-color: rgb(4, 104, 34);
+}
+
+#cancel {
+    background-color: rgb(184, 1, 1);
+}
+
+#ok:hover {
+    box-shadow: 0px 0px 8px 3px green;
+    border: 1px solid rgb(218, 218, 218);
+    cursor: pointer;
+}
+
+#cancel:hover {
+    border: 1px solid rgb(216, 213, 213);
+    box-shadow: 0px 0px 4px 3px red;
+    cursor: pointer;
 }
 
 #changebg {
     background-color: black;
-    position: fixed;
-    color: rgb(218, 215, 215);
+    position: relative;
+    color: black;
     margin: 10px;
     border: none;
     top: 0;
-    padding: 15px;
+    padding: 1%;
     font-size: medium;
-    background: rgba(0, 0, 0, 0.3);
+    background: black;
     border-radius: 85px;
+    overflow: hidden;
+    width: 10px;
+    transition: all 1.5s;
+    height: 45px;
+    border: 4px dotted white;
+    text-align: center;
 }
-#changebg:hover{
-cursor: pointer;
-    background: rgba(0, 0, 0, 0.5);
-    transition: all .5s;
+
+#changebg:hover {
+    color: rgb(255, 255, 255);
+    transition: all 1s;
+    width: 250px;
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.4);
 }
 
 #main {
     justify-self: center;
-    margin-top: 10%;
+    margin-top: 5%;
     border-radius: 5px;
     width: 1000px;
     padding: 3px 0px;
@@ -45,7 +131,7 @@ cursor: pointer;
 #searchcontainer {
     position: relative;
     border-radius: 10px;
-    left: 250px;
+    left: 220px;
     width: 600px;
     height: 40px;
     border: none;
@@ -64,6 +150,7 @@ cursor: pointer;
 }
 
 #searchbtn {
+    cursor: pointer;
     background-color: rgb(2, 155, 2);
     height: 100%;
     width: 10%;
@@ -73,21 +160,77 @@ cursor: pointer;
 }
 
 #engine {
+    overflow: hidden;
+    height: 23px;
+    border: 3px white;
     margin: 13px;
     float: left;
     color: black;
     font-size: larger;
+    transition: all 2s ease-out;
+    cursor: default;
+    border-style: none none solid none;
 }
 
-#engine hr {
-    background-color: rgb(99, 98, 98);
-    height: 4px;
-    border: none;
+#engine:hover {
+    width: auto;
+    height: 140px;
+    transition: all 1.5s ease-in;
 }
+
 
 #engine input,
 label {
     color: white;
     margin: 0px 0px 10px 0px;
     cursor: pointer;
+}
+
+#engine p {
+    color: white;
+}
+
+#shortcuts {
+    justify-items: center;
+    margin-top: 13px;
+    display: flex;
+    border: 2px solid white;
+    padding: 1px;
+    width: 25px;
+    height: 25px;
+    transition: all 1s ease-in-out;
+    overflow: hidden;
+    background-color: wheat;
+    border-radius: 20%;
+}
+
+
+/* #shortcuts img {
+    width: 25px;
+    height: 25px;
+    float: left;
+    border: 2px solid;
+} */
+
+#shortcuts:hover {
+    border-radius: 3%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 600px;
+    height: 150px;
+    transition: all 1s ease-in-out;
+    flex-wrap: wrap;
+}
+
+#shortcuts span {
+    text-align: center;
+    margin: 1% 5%;
+    width: 20px;
+    height: 15px;
+    padding: 3px;
+    border: 2px solid rgb(185, 185, 185);
+    border-radius: 3px;
+    background-color: white;
+    cursor: pointer;
+    box-shadow: 6px 6px 20px 3px black;
 }
