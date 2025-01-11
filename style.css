@@ -1,0 +1,93 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100%;
+    width: 100%;
+    background-image: url('img/hotairballon.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: sans-serif;
+
+}
+
+#changebg {
+    background-color: black;
+    position: fixed;
+    color: rgb(218, 215, 215);
+    margin: 10px;
+    border: none;
+    top: 0;
+    padding: 15px;
+    font-size: medium;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 85px;
+}
+#changebg:hover{
+cursor: pointer;
+    background: rgba(0, 0, 0, 0.5);
+    transition: all .5s;
+}
+
+#main {
+    justify-self: center;
+    margin-top: 10%;
+    border-radius: 5px;
+    width: 1000px;
+    padding: 3px 0px;
+    height: 400px;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+#searchcontainer {
+    position: relative;
+    border-radius: 10px;
+    left: 250px;
+    width: 600px;
+    height: 40px;
+    border: none;
+    background-color: white;
+    display: flex;
+}
+
+#searchbox {
+    outline: none;
+    font-size: 1.4rem;
+    background-color: transparent;
+    border: none;
+    width: 90%;
+    height: 100%;
+    padding: 3px;
+}
+
+#searchbtn {
+    background-color: rgb(2, 155, 2);
+    height: 100%;
+    width: 10%;
+    border: none;
+    border-radius: 0px 5px 5px 0px;
+    border-style: none none none solid;
+}
+
+#engine {
+    margin: 13px;
+    float: left;
+    color: black;
+    font-size: larger;
+}
+
+#engine hr {
+    background-color: rgb(99, 98, 98);
+    height: 4px;
+    border: none;
+}
+
+#engine input,
+label {
+    color: white;
+    margin: 0px 0px 10px 0px;
+    cursor: pointer;
+}
