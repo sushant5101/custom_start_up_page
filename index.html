@@ -23,14 +23,25 @@
         </div>
     </div>
     <button id="changebg" onclick="changeBackgroundImage();">change background image</button>
-    <!-- <div id="controll">
+    <div id="controll">
         <br>
         <img src="img/setting.png" alt="" id="settingicon">
         <div id="container">
+            <span id="arrow">^</span>
+            <h4 style="color: white;">Settings</h4>
+            <hr style="margin-bottom: 10px;">
+            <hr
+                style="float: left; width: 1.5px; border: none; height: 90%; background-color: white; margin-right: 5px;">
             <label for="auto">change background automatically</label>
-            <input id="auto" type="checkbox" name="autochange">
+            <input id="auto" type="checkbox" name="autochange"><br><br>
+            <label for="duration">Duration for auto bg change in sec</label><input type="number" max="2" name="duration"
+                id="duration" placeholder="00" value="10">
+            <!-- <label for="bgimg">Backgroung images</label> -->
+            <div id="bgimg">
+                <div id="imgpreview"></div>
+            </div>
         </div>
-    </div> -->
+    </div>
     <div id="main">
         <form target="_blank" id="searchcontainer" action="https://www.google.com/search" method="get">
             <input type="text" name="q" id="searchbox" autocomplete="off" placeholder="Search through google...">

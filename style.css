@@ -122,10 +122,10 @@ body {
 }
 
 #controll {
-    z-index: 2;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     top: 11%;
     position: fixed;
-    border: 2px solid;
+    font-style: italic;
     width: 400px;
     height: 500px;
 }
@@ -143,71 +143,142 @@ body {
 }
 
 #settingicon:hover {
-    rotate: 360deg;
-    transition: all 1.5s ease-in;
+    rotate: 90deg;
+    transition: all .5s ease-in;
 }
 
 #settingicon:not(:hover) {
-    rotate: -360deg;
-    transition: all 1.5s ease-out;
+    rotate: -90deg;
+    transition: all .5s ease-out;
 }
 
 #container {
     border-radius: 10px;
     padding: 10px;
-    width: 100%;
+    width: 90%;
     height: 100%;
     position: relative;
+    background: rgb(61, 15, 104);
     border: 2px solid white;
-    background: blueviolet;
-    left: 14%;
-    /* visibility: hidden; */
     opacity: 0;
-}
-
-#container:hover {
-    cursor: pointer;
-    animation: entry 5s ease-in-out infinite;
+    left: 13%;
+    bottom: 85%;
+    text-align: left;
+    display: none;
+    pointer-events: none;
+    /* animation: name duration timing-function delay iteration-count direction fill-mode; */
 }
 
 @keyframes entry {
     0% {
-        transform: translatex(-90px);
-    }
-
-    50% {
-        transform: translatex(-50px);
-
+        opacity: 0;
+        bottom: 85%;
     }
 
     100% {
         opacity: 1;
-        visibility: visible;
-        transform: translatex(0px);
+        bottom: 6%;
     }
 }
+
+@keyframes leave {
+    0% {
+        opacity: 1;
+        bottom: 6%;
+    }
+
+    100% {
+        opacity: 0;
+        bottom: 85%;
+    }
+}
+
+#container input {
+    float: right;
+    border: none;
+    outline: none;
+}
+
+#arrow {
+    font-family: sans-serif;
+    position: relative;
+    top: -2%;
+    float: left;
+    left: -4.8%;
+    transform: rotate(-90deg);
+    background-color: transparent;
+    color: rgb(255, 255, 255);
+    font-size: 1.3rem;
+    font-weight: bolder;
+}
+
+#duration {
+    width: 30px;
+    padding: 3px;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+#bgimg {
+    display:flex;
+    position: relative;
+    bottom: 30%;
+    left: 1%;
+    border:transparent;
+    width: 100%;
+    height: 150px;
+    background-color: bisque;
+    border-radius: 4px;
+   overflow: hidden;
+}
+
+#bgimg:hover{
+    overflow-y: hidden;
+    overflow-x: auto;
+}
+
+#bgimg img {
+    background: black;
+    border-radius: 5px;
+    width: 189px;
+    height: 100px;
+    margin: 7% 0px 0px 5px;
+    position: relative;
+    border: none;
+    cursor: pointer;
+}
+
+#imgpreview {
+    position: fixed;
+    background-color: white;
+    top: 30%;
+    left: 30%;
+    z-index: 3;
+    border-radius: 5px;
+    visibility: hidden;
+}
+
 
 #main {
     position: relative;
     left: 27vh;
     top: 20vh;
     border-radius: 5px;
-    width: 150vh;
+    width: 70%;
     padding: 3px 0px;
     height: 400px;
     background: rgba(0, 0, 0, 0.5);
-    z-index: 1;
 }
 
 #searchcontainer {
-    position: relative;
     border-radius: 10px;
-    left: 25vh;
-    width: 100vh;
-    height: 7vh;
+    width: 70%;
+    height: 10%;
     border: none;
+    margin-left: 16%;
     background-color: white;
     display: flex;
+    margin-top: 5px;
 }
 
 #searchbox {
@@ -241,6 +312,7 @@ body {
     border-style: none none solid none;
     animation: changecolor 5s ease-in-out .3s infinite reverse;
     border-image: linear-gradient(to right, red, blue) 1;
+    transition: all 1.5s ease-in;
     background: black;
     padding: 1vh;
     border-radius: 6px;
