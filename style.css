@@ -5,8 +5,9 @@
 
 body {
     height: 100vh;
-    width: 100%;
+    width: 100vw;
     overflow: hidden;
+    background-color: black;
     font-family: sans-serif;
     background-size: cover;
     background-position: center;
@@ -92,11 +93,11 @@ body {
 }
 
 #changebg {
-    position: relative;
+    position: absolute;
     color: black;
     margin: 10px;
     top: 0;
-    padding: 1%;
+    padding: 10px;
     font-size: medium;
     background: black;
     height: 45px;
@@ -120,11 +121,78 @@ body {
     background-color: black;
 }
 
+#controll {
+    z-index: 1;
+    top: 11%;
+    position: fixed;
+    border: 2px solid;
+    width: 400px;
+    height: 500px;
+}
+
+#controll #container {
+    display: block;
+}
+
+#settingicon {
+    border: 2px solid;
+    margin: 0px 10px;
+    cursor: pointer;
+    background-color: white;
+    border-radius: 50%;
+}
+
+#settingicon:hover {
+    rotate: 360deg;
+    transition: all 1.5s ease-in;
+}
+
+#settingicon:not(:hover) {
+    rotate: -360deg;
+    transition: all 1.5s ease-out;
+}
+
+#container {
+    border-radius: 10px;
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    border: 2px solid white;
+    background: blueviolet;
+    left: 14%;
+    /* visibility: hidden; */
+    opacity: 0;
+}
+
+#container:hover {
+    cursor: pointer;
+    animation: entry 5s ease-in-out infinite;
+}
+
+@keyframes entry {
+    0% {
+        transform: translatex(-90px);
+    }
+
+    50% {
+        transform: translatex(-50px);
+
+    }
+
+    100% {
+        opacity: 1;
+        visibility: visible;
+        transform: translatex(0px);
+    }
+}
+
 #main {
-    justify-self: center;
-    margin-top: 5%;
+    position: relative;
+    left: 27vh;
+    top: 20vh;
     border-radius: 5px;
-    width: 1000px;
+    width: 150vh;
     padding: 3px 0px;
     height: 400px;
     background: rgba(0, 0, 0, 0.5);
@@ -133,9 +201,9 @@ body {
 #searchcontainer {
     position: relative;
     border-radius: 10px;
-    left: 220px;
-    width: 600px;
-    height: 40px;
+    left: 25vh;
+    width: 100vh;
+    height: 7vh;
     border: none;
     background-color: white;
     display: flex;
@@ -163,18 +231,17 @@ body {
 
 #engine {
     overflow: hidden;
-    height: 23px;
     border: 5px;
-    margin: 13px;
+    margin: 3vh;
     float: left;
     color: black;
     font-size: larger;
     cursor: default;
     border-style: none none solid none;
     animation: changecolor 5s ease-in-out .3s infinite reverse;
-    border-image: linear-gradient(to right, red, blue, green) 1;
+    border-image: linear-gradient(to right, red, blue) 1;
     background: black;
-    padding: 3px;
+    padding: 1vh;
     border-radius: 6px;
 }
 
@@ -200,7 +267,7 @@ body {
     }
 
     100% {
-        border-image: linear-gradient(top, red, blue) 1;
+        border-image: linear-gradient(to right, red, blue) 1;
     }
 }
 
@@ -214,6 +281,7 @@ label {
 }
 
 #engine p {
+    padding-bottom: 1vh;
     color: white;
 }
 
