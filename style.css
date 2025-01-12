@@ -4,7 +4,6 @@
 }
 
 body {
-    cursor: grab;
     height: 100vh;
     width: 100%;
     overflow: hidden;
@@ -174,9 +173,13 @@ body {
     border-style: none none solid none;
     animation: changecolor 5s ease-in-out .3s infinite reverse;
     border-image: linear-gradient(to right, red, blue, green) 1;
+    background: black;
+    padding: 3px;
+    border-radius: 6px;
 }
 
 #engine:hover {
+    background: transparent;
     width: auto;
     height: 140px;
     transition: all 1.5s ease-in;

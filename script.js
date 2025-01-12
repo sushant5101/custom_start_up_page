@@ -11,6 +11,8 @@ const logo = document.getElementById("logo");
 const shortname = document.getElementById("name");
 const url = document.getElementById("url");
 const shortlabel = document.getElementById("shortlabel");
+const changebg = document.getElementById("changebg");
+const auto = document.getElementById("auto");
 
 radiobutton.forEach(radio => {
     radio.addEventListener('change', () => {
@@ -61,7 +63,19 @@ function changeBackgroundImage() {
 // Initial background image
 changeBackgroundImage();
 // Change the background image every 10 seconds
-setInterval(changeBackgroundImage, 10000);
+auto.addEventListener('change', () => {
+    if (auto.checked) {
+        intervalId = setInterval(changeBackgroundImage, 10000);
+        changebg.disabled = true;
+        changebg.style.backgroundColor = "rgb(153, 152, 152)";
+        changebg.style.maxWidth = "30px";
+    } else {
+        clearInterval(intervalId);
+        changebg.disabled = false;
+        changebg.style.backgroundColor = "rgb(0,0,0)";
+        changebg.style.maxWidth = "251px";
+    }
+});
 
 function engine_selector(engine) {
     switch (engine) {
