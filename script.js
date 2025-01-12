@@ -8,6 +8,9 @@ var addshortcuts = document.getElementById("add");
 const popupbox = document.getElementById("popupbox");
 const popupwindow = document.getElementById("popupwindow");
 const logo = document.getElementById("logo");
+const shortname = document.getElementById("name");
+const url = document.getElementById("url");
+const shortlabel = document.getElementById("shortlabel");
 
 radiobutton.forEach(radio => {
     radio.addEventListener('change', () => {
@@ -15,6 +18,7 @@ radiobutton.forEach(radio => {
         engine_selector(radio.value);
     });
 });
+
 
 document.addEventListener("click", (event) => {
     if (event == '/') user_question.focus = true;
@@ -101,10 +105,35 @@ function engine_selector(engine) {
     console.log(engine);
 }
 function add() {
-    var s = document.createElement("span");
-    shortcutscontainer.appendChild(s);
-    popupbox.style.display = "none"
+    if (shortname.value && url.value) {
 
+        const a = document.createElement("a");
+        const s = document.createElement("span");
+        const p = document.createElement("p");
+        const d = document.createElement("div");
+
+        a.href = url.value;
+        a.target = "_blank"
+        a.innerText = shortname.value[0];
+        p.innerText = shortname.value;
+        a.style.color = "#000000";
+        a.style.textDecoration = "none";
+        shortcutscontainer.appendChild(d);
+        d.appendChild(s);
+        s.appendChild(a);
+        s.appendChild(p);
+        // const inputData = {
+        //     name: shortname.value,
+        //     url: url.value
+        // };
+        // saveData(inputData);
+    }
+    else {
+        alert("nothing to add");
+    }
+    shortname.value = "";
+    url.value = "";
+    popupbox.style.display = "none"
 }
 
 window.addEventListener("click", (event) => {
@@ -116,3 +145,17 @@ window.addEventListener("click", (event) => {
 // if (shortcutscontainer.offsetWidth >= 30) {
 //     detailsimg.style.display = "none";
 // }
+
+
+function saveData(data) {
+    let dataList = JSON.parse(localStorage.getItem('dataList')) || [];
+    dataList.push(data);
+    localStorage.setItem('dataList', JSON.stringify(dataList));
+}
+
+function displayData() {
+    const dataList = JSON.parse(localStorage.getItem('dataList')) || [];
+    const listItems = dataList.map(data => `<li>Name: ${data.name}, Address: ${data.address}</li>`).join('');
+    document.getElementById('dataList').innerHTML = listItems;
+}
+
