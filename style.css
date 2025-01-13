@@ -14,6 +14,26 @@ body {
     background-repeat: no-repeat;
 }
 
+#resultpopupbox {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0, 0.9);
+    z-index: 2;
+}
+
+#resultpopupwindow {
+    background-color: rgb(194, 192, 192);
+    justify-self: center;
+    width: 600px;
+    margin-top: 10px;
+    height: 100%;
+    border-radius: 10px;
+    border: 5px double rgb(106, 124, 0);
+    padding: 10px;
+}
+
 #popupbox {
     display: none;
     justify-items: center;
@@ -25,6 +45,7 @@ body {
 }
 
 #popupwindow {
+    opacity: 1;
     border: 2px solid gray;
     width: 30%;
     height: 30%;
@@ -130,9 +151,6 @@ body {
     height: 500px;
 }
 
-#controll #container {
-    display: block;
-}
 
 #settingicon {
     border: 2px solid;
@@ -143,13 +161,11 @@ body {
 }
 
 #settingicon:hover {
-    rotate: 90deg;
-    transition: all .5s ease-in;
+    background-color: gray;
 }
 
 #settingicon:not(:hover) {
-    rotate: -90deg;
-    transition: all .5s ease-out;
+    background-color: wheat;
 }
 
 #container {
@@ -160,37 +176,12 @@ body {
     position: relative;
     background: rgb(61, 15, 104);
     border: 2px solid white;
-    opacity: 0;
     left: 13%;
-    bottom: 85%;
+    bottom: 6%;
     text-align: left;
-    display: none;
+    opacity: 0;
     pointer-events: none;
     /* animation: name duration timing-function delay iteration-count direction fill-mode; */
-}
-
-@keyframes entry {
-    0% {
-        opacity: 0;
-        bottom: 85%;
-    }
-
-    100% {
-        opacity: 1;
-        bottom: 6%;
-    }
-}
-
-@keyframes leave {
-    0% {
-        opacity: 1;
-        bottom: 6%;
-    }
-
-    100% {
-        opacity: 0;
-        bottom: 85%;
-    }
 }
 
 #container input {
@@ -220,19 +211,19 @@ body {
 }
 
 #bgimg {
-    display:flex;
+    display: flex;
     position: relative;
     bottom: 30%;
     left: 1%;
-    border:transparent;
+    border: transparent;
     width: 100%;
     height: 150px;
     background-color: bisque;
     border-radius: 4px;
-   overflow: hidden;
+    overflow: hidden;
 }
 
-#bgimg:hover{
+#bgimg:hover {
     overflow-y: hidden;
     overflow-x: auto;
 }
@@ -251,12 +242,14 @@ body {
 #imgpreview {
     position: fixed;
     background-color: white;
-    top: 30%;
-    left: 30%;
+    top: 10%;
+    color: white;
+    left: 25%;
     z-index: 3;
     border-radius: 5px;
     visibility: hidden;
 }
+
 
 
 #main {

@@ -5,10 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="img/chrome.png" type="image/x-icon">
     <title>custom start up</title>
 </head>
 
 <body>
+    <div id="resultpopupbox">
+        <div id="resultpopupwindow"></div>
+    </div>
     <div id="popupbox">
         <div id="popupwindow">
             <form id="input" action="">
@@ -25,7 +29,7 @@
     <button id="changebg" onclick="changeBackgroundImage();">change background image</button>
     <div id="controll">
         <br>
-        <img src="img/setting.png" alt="" id="settingicon">
+        <img src="img/setting.png" tagname = "img" alt="" id="settingicon">
         <div id="container">
             <span id="arrow">^</span>
             <h4 style="color: white;">Settings</h4>
@@ -38,15 +42,15 @@
                 id="duration" placeholder="00" value="10">
             <!-- <label for="bgimg">Backgroung images</label> -->
             <div id="bgimg">
-                <div id="imgpreview"></div>
+                <!-- <div id="imgpreview"></div> -->
             </div>
         </div>
     </div>
     <div id="main">
-        <form target="_blank" id="searchcontainer" action="https://www.google.com/search" method="get">
-            <input type="text" name="q" id="searchbox" autocomplete="off" placeholder="Search through google...">
-            <input type="hidden" name="" value="" id="hidden"><img id="logo" src="img/google.png" alt="">
-            <button id="searchbtn"><img src="img/searchicon.png" alt=""></button>
+        <form id="searchcontainer">
+            <input type="text" id="searchbox" autocomplete="off" placeholder="Search through google...">
+            <img id="logo" src="img/google.png" alt="">
+            <button id="searchbtn" type="submit"><img src="img/searchicon.png" alt=""></button>
         </form><br>
         <div id="engine">
             <p>Search engine's</p>

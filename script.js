@@ -1,8 +1,6 @@
-
 var radiobutton = document.querySelectorAll('input[name=engine]')
 var user_question = document.getElementById("searchbox")
 var formdetails = document.getElementById("searchcontainer")
-var searchqueri = document.getElementById("hidden")
 var shortcutscontainer = document.getElementById("shortcuts")
 const popupbox = document.getElementById("popupbox")
 const popupwindow = document.getElementById("popupwindow")
@@ -18,6 +16,9 @@ const controllbox = document.getElementById("controll")
 const changeduration = document.getElementById("duration");
 const bgimg = document.getElementById("bgimg");
 const imgpreview = document.getElementById("imgpreview");
+const resultpopupbox = document.getElementById("resultpopupbox");
+const resultpopupwindow = document.getElementById("resultpopupwindow");
+
 var play = false
 
 
@@ -29,11 +30,7 @@ radiobutton.forEach(radio => {
 })
 
 
-document.addEventListener("click", (event) => {
-    if (event == '/') user_question.focus = true
-})
 
-// Array of image filenames
 const images = [
     'butterflies.webp',
     'colors.jpg',
@@ -45,44 +42,50 @@ const images = [
     'yourname.webp'
 ]
 
-images.forEach(img => {
-    var i = document.createElement("img")
-    i.src = `img/${img}`
-    i.loading = "lazy"
-    bgimg.appendChild(i)
-})
 
-// .addEventListener("mouseenter",()=>{
-//     imgpreview.appendChild(i);
-//     imgpreview.style.visibility = "visible"
-// })
+
+
+var d = document.createElement("img")
+d.src = "img/add.png"
+d.style.backgroundColor = "#c2c2c2"
+d.style.width = "50px"
+d.style.height = "50px"
+d.style.marginTop = "50px"
+bgimg.appendChild(d)
+
 
 function changeBackgroundImage() {
-    // Get a random image from the array
-    document.body.style.transition = "all 3s ease-in-out"
+    document.body.style.transition = "all 1s ease-in-out"
     document.body.style.opacity = "90%"
-    document.body.style.transition = "all 3s ease-in-out"
+    document.body.style.transition = "all 1s ease-in-out"
     document.body.style.visibility = "50%"
-    document.body.style.transition = "all 3s ease-in-out"
+    document.body.style.transition = "all 1s ease-in-out"
     document.body.style.visibility = "40%"
-    document.body.style.transition = "all 3s ease-in-out"
+    document.body.style.transition = "all 1s ease-in-out"
     document.body.style.visibility = "50%"
-    document.body.style.transition = "all 3s ease-in-out"
+    document.body.style.transition = "all 1s ease-in-out"
     document.body.style.visibility = "90%"
-    document.body.style.transition = "all 3s ease-in-out"
+    document.body.style.transition = "all 1s ease-in-out"
     document.body.style.visibility = "100%"
 
     const randomImage = images[Math.floor(Math.random() * images.length)]
-    // Set the background image of the body
     document.body.style.backgroundImage = `url(img/${randomImage})`
 
 }
 
 
-// Initial background image
 changeBackgroundImage()
-// Change the background image every 10 seconds
+
 auto.addEventListener('change', () => {
+    is()
+})
+
+changeduration.addEventListener("change", () => {
+    is()
+})
+
+
+function is() {
     if (auto.checked) {
         intervalId = setInterval(changeBackgroundImage, changeduration.value * 1000)
         changebg.disabled = true
@@ -94,46 +97,63 @@ auto.addEventListener('change', () => {
         changebg.style.backgroundColor = "rgb(0,0,0)"
         changebg.style.maxWidth = "251px"
     }
-})
+}
 
+settingicon.addEventListener("mouseenter", () => showcontrollbox())
 
-
-settingicon.addEventListener("mouseenter", () => {
-    container.style.animation = "entry .4s ease-in forwards"
-    controllbox.style.zIndex = "2"
-    play = true
+function showcontrollbox() {
+    console.log("function called")
+    container.style.transition = "all .2s ease-in"
+    container.style.opacity = "1"
+    controllbox.style.zIndex = "5"
     container.style.pointerEvents = "all"
+    console.log("hovered")
+    play = true
+    console.log(play)
     container.addEventListener("mouseleave", () => {
-        container.style.pointerEvents = "none"
-        container.style.animation = "leave .4s ease-out"
+        container.style.transition = "all .2s ease-out"
+        container.style.opacity = "0"
         controllbox.style.zIndex = "0"
+        container.style.pointerEvents = "none"
+        console.log("hovered")
+        play = false
     })
-})
 
-window.addEventListener("keydown", (event) => {
-    if (play && event.key === 'Escape') {
-        container.style.animation = "leave .4s ease-out"
-        controllbox.style.zIndex = "0"
-        container.style.pointerEvents = "none"
-    }
-})
+    window.addEventListener("keydown", (event) => {
+        if (play && event.key === 'Escape') {
+            hide()
+        }
+    })
 
-window.addEventListener("click", (event) => {
-    if (event.target == document.getElementById("main") || event.target == user_question || event.target == changebg || event.target == controllbox) {
-        container.style.animation = "leave .4s ease-in"
-        container.style.pointerEvents = "none"
-        controllbox.style.zIndex = "0"
+    window.addEventListener("click", (event) => {
+        if (event.target == document.getElementById("main") || event.target == user_question || event.target == changebg || event.target == controllbox) {
+            hide()
+        }
+    })
+}
 
-    }
-})
+function hide() {
+    container.style.transition = "all .5s ease-in"
+    container.style.opacity = "0"
+    container.style.pointerEvents = "none"
+    controllbox.style.zIndex = "0"
+}
 
+showavailableimg()
+
+function showavailableimg() {
+    images.forEach(img => {
+        var i = document.createElement("img")
+        i.src = `img/${img}`
+        bgimg.appendChild(i)
+    })
+}
 
 
 function engine_selector(engine) {
     switch (engine) {
         case 'google':
             logo.src = "img/google.png"
-            formdetails.action = "https://www.google.com/search"
             user_question.name = "q"
             user_question.placeholder = "Search through google..."
             searchqueri.name = ""
@@ -141,27 +161,15 @@ function engine_selector(engine) {
             break
         case 'wikipedia':
             logo.src = "img/wikipedia.png"
-            formdetails.action = "https://en.wikipedia.org/w/index.php"
-            user_question.name = "search"
             user_question.placeholder = "search through wikipedia page..."
-            searchqueri.name = "title"
-            searchqueri.value = "Special:Search"
             break
         case 'bing':
             logo.src = "img/bing.png"
-            formdetails.action = "https://www.bing.com/search"
-            user_question.name = "q"
             user_question.placeholder = "Search with Bing..."
-            searchqueri.name = ""
-            searchqueri.value = ""
             break
         case 'duckduckgo':
             logo.src = "img/duckduckgo.png"
-            formdetails.action = "https://duckduckgo.com/"
-            user_question.name = "q"
             user_question.placeholder = "Search with DuckDuckGo..."
-            searchqueri.name = ""
-            searchqueri.value = ""
             break
         default:
             console.error("Something went wrong!!")
@@ -170,6 +178,15 @@ function engine_selector(engine) {
 
     console.log(engine)
 }
+
+
+window.addEventListener("click", (event) => {
+    if (event.target == resultpopupbox) {
+        resultpopupbox.style.display = "none"
+    }
+})
+
+
 function add() {
     if (shortname.value && url.value) {
 
@@ -188,11 +205,6 @@ function add() {
         d.appendChild(s)
         s.appendChild(a)
         s.appendChild(p)
-        // const inputData = {
-        //     name: shortname.value,
-        //     url: url.value
-        // }
-        // saveData(inputData)
     }
     else {
         alert("nothing to add")
@@ -211,19 +223,15 @@ popupwindow.addEventListener("click", (event) => {
     event.stopPropagation()
 })
 
-// if (shortcutscontainer.offsetWidth >= 30) {
-//     detailsimg.style.display = "none"
+
+// function saveData(data) {
+//     let dataList = JSON.parse(localStorage.getItem('dataList')) || []
+//     dataList.push(data)
+//     localStorage.setItem('dataList', JSON.stringify(dataList))
 // }
 
-
-function saveData(data) {
-    let dataList = JSON.parse(localStorage.getItem('dataList')) || []
-    dataList.push(data)
-    localStorage.setItem('dataList', JSON.stringify(dataList))
-}
-
-function displayData() {
-    const dataList = JSON.parse(localStorage.getItem('dataList')) || []
-    const listItems = dataList.map(data => `<li>Name: ${data.name}, Address: ${data.address}</li>`).join('')
-    document.getElementById('dataList').innerHTML = listItems
-}
+// function displayData() {
+//     const dataList = JSON.parse(localStorage.getItem('dataList')) || []
+//     const listItems = dataList.map(data => `<li>Name: ${data.name}, Address: ${data.address}</li>`).join('')
+//     document.getElementById('dataList').innerHTML = listItems
+// }
