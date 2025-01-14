@@ -152,14 +152,16 @@ document.addEventListener("DOMContentLoaded", () => {
     function load() {
         called = true
         images.forEach(img => {
-            var temp = document.createElement("img")
             const i = document.createElement("img")
-            temp.src = `img/${img}`
+            const a = document.createElement("a")
+            i.src = `img/${img}`
 
-            loadingid = setInterval(temp.addEventListener("load", () => {
+            loadingid = setInterval(i.addEventListener("load", () => {
                 i.loading = "lazy"
-                i.src = temp.src
-                bgimg.appendChild(i)
+                a.href = i.src
+                a.target = "_blank"
+                a.appendChild(i)
+                bgimg.appendChild(a)
             }), 1000)
 
             clearInterval(loadingid)
