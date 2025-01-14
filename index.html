@@ -26,10 +26,10 @@
                 <button onclick="popupbox.style.display='none'" id="cancel">Cancel</button></span>
         </div>
     </div>
-    <button id="changebg" onclick="changeBackgroundImage();">change background image</button>
+    <button id="changebg">change background image</button>
     <div id="controll">
         <br>
-        <img src="img/setting.png" tagname = "img" alt="" id="settingicon">
+        <img src="img/setting.png" tagname="img" alt="" id="settingicon">
         <div id="container">
             <span id="arrow">^</span>
             <h4 style="color: white;">Settings</h4>
@@ -47,9 +47,9 @@
         </div>
     </div>
     <div id="main">
-        <form id="searchcontainer">
-            <input type="text" id="searchbox" autocomplete="off" placeholder="Search through google...">
-            <img id="logo" src="img/google.png" alt="">
+        <form target="_blank" id="searchcontainer" action="https://www.google.com/search" method="get">
+            <input type="text" name="q" id="searchbox" autocomplete="off" placeholder="Search through google...">
+            <input type="hidden" name="" value="" id="hidden"><img id="logo" loading="lazy" src="img/google.png" alt="">
             <button id="searchbtn" type="submit"><img src="img/searchicon.png" alt=""></button>
         </form><br>
         <div id="engine">
@@ -69,7 +69,7 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="index.js"></script>
 </body>
 
 </html>
