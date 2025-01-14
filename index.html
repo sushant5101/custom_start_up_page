@@ -39,9 +39,9 @@
             <label for="auto">change background automatically</label>
             <input id="auto" type="checkbox" name="autochange"><br><br>
             <label for="duration">Duration for auto bg change in sec</label>
-            <input type="number" max="2" name="duration" id="duration" placeholder="00" value="10"><br><br>
+            <input type="number" max="60" min="5" name="duration" id="duration" placeholder="00" value="10"><br><br>
             <label for="brightness">brightness of the bg image in %</label>
-            <input id="brightness" type="number" placeholder="00" value="100">
+            <input id="brightness" min="10" max="100" step="5" type="number" placeholder="00" value="100">
             <div id="bgimg">
                 <div id="imgpreview"></div>
             </div>

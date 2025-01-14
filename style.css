@@ -252,7 +252,7 @@ body {
     background: black;
     border-radius: 5px;
     width: 189px;
-    height: 100px;
+    height: 100%;
     position: relative;
     border: none;
     cursor: pointer;
@@ -261,7 +261,7 @@ body {
 #bgimg a {
     margin: 7% 0px 0px 5px;
     width: 189px;
-    height: 100px;
+    height: 110px;
 }
 
 #imgpreview {
@@ -279,8 +279,8 @@ body {
 
 #main {
     position: relative;
-    left: 27vh;
-    top: 20vh;
+    left: 16vw;
+    margin: 16vh 0vh;
     border-radius: 5px;
     width: 70%;
     padding: 3px 0px;

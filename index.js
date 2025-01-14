@@ -138,12 +138,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //--------to check if the controll box is shown and processing accordingly
 
-    window.addEventListener("keypress", (event) => { event.key === "Enter" && shown ? savesetting() : null })
+    window.addEventListener("keydown", (event) => { event.key === "Enter" && shown ? savesetting() : null})
+    window.addEventListener("keydown", (event) => { event.key === "Escape" && shown ? hidecontrollbox() : null})
 
     //==========function to save the setting=====
 
     function savesetting() {
         console.log("Comming on future")
+        hidecontrollbox()
         //=====up comming !
     }
 
@@ -159,6 +161,7 @@ document.addEventListener("DOMContentLoaded", () => {
             loadingid = setInterval(i.addEventListener("load", () => {
                 i.loading = "lazy"
                 a.href = i.src
+                a.title = "click to view the image"
                 a.target = "_blank"
                 a.appendChild(i)
                 bgimg.appendChild(a)
