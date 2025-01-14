@@ -12,11 +12,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const url = document.getElementById("url")
     const shortlabel = document.getElementById("shortlabel")
     const changebg = document.getElementById("changebg")
-    const auto = document.getElementById("auto")
     const settingicon = document.getElementById("settingicon")
     const container = document.getElementById("container")
     const controllbox = document.getElementById("controll")
-    const changeduration = document.getElementById("duration")
+    const auto = document.getElementById("auto")
+    var duration = document.getElementById("duration")
+    var brightness = document.getElementById("brightness")
     const bgimg = document.getElementById("bgimg")
     const imgpreview = document.getElementById("imgpreview")
     const resultpopupbox = document.getElementById("resultpopupbox")
@@ -24,6 +25,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const searchqueri = document.getElementById("hidden")
     var loadingid
     var called = false
+    let shown = false
+    var changeduration = duration.value
+    var changebrightness = brightness.value
+
 
     //====checking all the radio button for change====
 
@@ -113,8 +118,9 @@ document.addEventListener("DOMContentLoaded", () => {
     function showcontrollbox() {
         container.style.animation = "entry .5s ease-in forwards"
         container.style.pointerEvents = "all"
-        if (!called) load()
         container.addEventListener("animationstart", () => controllbox.style.zIndex = "3")
+        container.addEventListener("animationend", (event) => { if (event.animationName === "entry" && !called) { load() } })
+        shown = true
     }
 
     //-------------checking if mouse is hovered and calling function
@@ -127,11 +133,22 @@ document.addEventListener("DOMContentLoaded", () => {
         container.style.pointerEvents = "none"
         container.style.animation = "leave .5s ease-in "
         container.addEventListener("animationend", (event) => { if (event.animationName === 'leave') { controllbox.style.zIndex = "1" } })
+        shown = false
     }
 
+    //--------to check if the controll box is shown and processing accordingly
+
+    window.addEventListener("keypress", (event) => { event.key === "Enter" && shown ? savesetting() : null })
+
+    //==========function to save the setting=====
+
+    function savesetting() {
+        console.log("Comming on future")
+        //=====up comming !
+    }
 
     //====function to load img to the container
-    
+
     function load() {
         called = true
         images.forEach(img => {
@@ -139,7 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const i = document.createElement("img")
             temp.src = `img/${img}`
 
-            const loadingid = setInterval(temp.addEventListener("load", () => {
+            loadingid = setInterval(temp.addEventListener("load", () => {
                 i.loading = "lazy"
                 i.src = temp.src
                 bgimg.appendChild(i)

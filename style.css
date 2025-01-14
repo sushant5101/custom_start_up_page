@@ -212,6 +212,10 @@ body {
     float: right;
     border: none;
     outline: none;
+    width: 38px;
+    padding: 3px;
+    font-weight: bold;
+    border-radius: 4px;
 }
 
 #arrow {
@@ -225,12 +229,6 @@ body {
     font-weight: bolder;
 }
 
-#duration {
-    width: 30px;
-    padding: 3px;
-    font-weight: bold;
-    border-radius: 4px;
-}
 
 #bgimg {
     display: flex;
