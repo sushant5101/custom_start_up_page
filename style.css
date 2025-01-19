@@ -12,6 +12,7 @@ body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    transition: all 1s ease-in-out;
 }
 
 
@@ -114,38 +115,25 @@ body {
     cursor: pointer;
 }
 
+
 #changebg {
-    position: absolute;
-    color: black;
-    margin: 10px;
-    top: 0;
-    padding: 10px;
-    font-size: medium;
-    background: black;
-    height: 45px;
-    border: 4px dotted white;
-    overflow: hidden;
-    border-radius: 85px;
-    text-align: left;
+    transition: all 2s ease-in-out;
+    color: white;
+    display: block;
+    margin: 0 auto;
+    width: 50%;
+    padding: 2% 0%;
+    border-radius: 4px;
+    text-align: center;
+    font-weight: bold;
+    outline: none;
+    border: none;
 }
 
-#changebg:hover {
-    color: rgb(255, 255, 255);
-    transition: all 1s ease-in-out;
-    width: 250px;
-    cursor: pointer;
-    background: rgba(0, 0, 0, 0.4);
-}
-
-#changebg:not(:hover) {
-    width: 10px;
-    transition: all 1.5s ease-in-out;
-    background-color: black;
-}
 
 #controll {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    top: 11%;
+    top: 0;
     position: fixed;
     font-style: italic;
     width: 400px;

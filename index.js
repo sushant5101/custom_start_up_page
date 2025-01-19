@@ -26,15 +26,71 @@ document.addEventListener("DOMContentLoaded", () => {
     var loadingid
     var called = false
     let shown = false
-    var changeduration = duration.value
+    var changeduration = duration.value * 1000
     var changebrightness = brightness.value
+    let ismanual = true
+    let autochangeid
 
+
+    //====checking if new input and setting it
+
+    duration.addEventListener("change", () => { changeduration = duration.value * 1000 })
+
+    //=============images to choose from===============
+
+    const images = [
+        'butterflies.webp',
+        'colors.jpg',
+        'driedtree.webp',
+        'headphone.jpg',
+        'hotairballon.webp',
+        'totoro.webp',
+        'water.webp',
+        'yourname.webp'
+    ]
+
+    //setting style for the button
+    changebg.style.backgroundPosition = "center"
+    changebg.style.backgroundSize = "cover"
+    changebg.style.backgroundColor = " black"
+    changebg.style.backgroundImage = "none"
+
+    //======checking if the btn is hovered? 
+
+    changebg.addEventListener("mouseover", () => { ismanual ? hoverin() : null })
+    changebg.addEventListener("mouseout", () => { ismanual ? hoverout() : null })
 
     //====checking all the radio button for change====
 
     radiobutton.forEach(radio => {
         radio.addEventListener("change", () => { engineswitcher(radio.value) })
     })
+
+    //--------initial bg change-------
+    backgroundImagechanger()
+
+    //--------------changing on click----
+
+    changebg.addEventListener("click", () => { backgroundImagechanger(); })
+
+    //-------------checking if mouse is hovered and calling function
+
+    settingicon.addEventListener("mouseenter", () => showcontrollbox())
+
+    //-------------checking if mouse is hovered and calling function
+
+    container.addEventListener("mouseleave", () => hidecontrollbox())
+
+    //--------to check if the controll box is shown and processing accordingly
+
+    window.addEventListener("keydown", (event) => { event.key === "Enter" && shown ? savesetting() : null })
+    window.addEventListener("keydown", (event) => { event.key === "Escape" && shown ? hidecontrollbox() : null })
+
+
+    //---------listening fo auto bg change button change
+
+    auto.addEventListener("change", (event) => { event.target.checked ? autochangeon() : autochangeoff() })
+
     //===============function to change the search engine according to the  radiobutton change=======
 
     function engineswitcher(engine) {
@@ -83,18 +139,6 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log(engine)
     }
 
-    //=============images to choose from===============
-
-    const images = [
-        'butterflies.webp',
-        'colors.jpg',
-        'driedtree.webp',
-        'headphone.jpg',
-        'hotairballon.webp',
-        'totoro.webp',
-        'water.webp',
-        'yourname.webp'
-    ]
 
     //===========bg changer func=============
 
@@ -102,16 +146,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const randomImage = images[Math.floor(Math.random() * images.length)]
         document.body.style.backgroundImage = `url(img/${randomImage})`
     }
-    //--------initial bg change-------
-    backgroundImagechanger()
-
-    //--------------changing on click----
-
-    changebg.addEventListener("click", () => { backgroundImagechanger(); })
-
-    //-------------checking if mouse is hovered and calling function
-
-    settingicon.addEventListener("mouseenter", () => showcontrollbox())
 
     //-----to start the entry animation
 
@@ -123,9 +157,6 @@ document.addEventListener("DOMContentLoaded", () => {
         shown = true
     }
 
-    //-------------checking if mouse is hovered and calling function
-
-    container.addEventListener("mouseleave", () => hidecontrollbox())
 
     //-----to start the leave animation
 
@@ -136,17 +167,53 @@ document.addEventListener("DOMContentLoaded", () => {
         shown = false
     }
 
-    //--------to check if the controll box is shown and processing accordingly
-
-    window.addEventListener("keydown", (event) => { event.key === "Enter" && shown ? savesetting() : null})
-    window.addEventListener("keydown", (event) => { event.key === "Escape" && shown ? hidecontrollbox() : null})
-
     //==========function to save the setting=====
 
     function savesetting() {
         console.log("Comming on future")
         hidecontrollbox()
         //=====up comming !
+    }
+
+    //===========function to change bg preodicaly and control the side effects===
+
+    function autochangeon() {
+        ismanual = false
+        changebg.disabled = true
+        changebg.style.backgroundColor = "gray"
+        changebg.style.backgroundImage = "none"
+        changebg.style.color = "white"
+        changebg.style.cursor = "default"
+        autochangeid = setInterval(backgroundImagechanger, changeduration)
+        console.log(autochangeid)
+    }
+
+    //=========function to turn of the auto change==
+
+    function autochangeoff() {
+        ismanual = true
+        changebg.disabled = false
+        changebg.style.backgroundImage = "url(img/butterflies.webp)"
+        changebg.style.background = "black"
+        changebg.style.color = "white"
+        clearInterval(autochangeid)
+    }
+
+    //======function to handel hover of bg change btn===
+
+    function hoverin() {
+        changebg.style.backgroundImage = "url(img/butterflies.webp)"
+        changebg.style.color = "transparent"
+        changebg.style.cursor = "pointer"
+    }
+
+    //==========function to handel hover out of change btn
+
+    function hoverout() {
+        changebg.style.color = "white"
+        changebg.style.cursor = "pointer"
+        changebg.style.backgroundColor = "black"
+        changebg.style.backgroundImage = "none"
     }
 
     //====function to load img to the container
