@@ -39,9 +39,9 @@
             <label for="auto">change background automatically</label>
             <input id="auto" type="checkbox" name="autochange"><br><br>
             <label for="duration">Duration for auto bg change in sec</label>
-            <input type="number" max="60" min="5" name="duration" id="duration" placeholder="00" value="10"><br><br>
+            <input class="settinginput" type="number" max="60" min="5" name="duration" id="duration" placeholder="00" value="10"><br><br>
             <label for="brightness">brightness of the bg image in %</label>
-            <input id="brightness" min="10" max="100" step="5" type="number" placeholder="00" value="100">
+            <input class="settinginput" id="brightness" min="10" max="100" step="5" type="number" placeholder="00" value="100">
             <div id="bgimg">
                 <div id="imgpreview"></div>
             </div>
@@ -54,7 +54,7 @@
             <button id="searchbtn" type="submit"><img src="img/searchicon.png" alt=""></button>
         </form><br>
         <div id="engine">
-            <p>Search engine's</p>
+            <p id="enginep">Search engine's</p>
             <input id="google" checked type="radio" name="engine" value="google">
             <label for="google">Google<br></label>
             <input id="wikipedia" type="radio" name="engine" value="wikipedia">

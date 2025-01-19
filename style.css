@@ -144,17 +144,20 @@ body {
     top: 0;
     position: absolute;
     font-style: italic;
-    width: 400px;
-    height: 500px;
+    width: 100vw;
+    height: 100vh;
+    background-color: transparent;
 }
 
 
 #settingicon {
+    display: block;
     border: 2px solid;
-    margin: 0px 10px;
+    margin: 1%;
     cursor: pointer;
     background-color: white;
     border-radius: 50%;
+    transition: all 1s ease-in-out;
 }
 
 #settingicon:hover {
@@ -168,8 +171,8 @@ body {
 #container {
     border-radius: 10px;
     padding: 10px;
-    width: 90%;
-    height: 100%;
+    width: 33%;
+    height: 97%;
     position: relative;
     background: rgb(61, 15, 104);
     border: 2px solid white;
@@ -432,4 +435,42 @@ label {
     margin: 1% 0% 0% 3%;
     width: 25px;
     height: 15px;
+}
+
+/* responsiveness */
+
+@media (max-width: 1000px) {
+
+    #main {
+        background-color: transparent;
+        position: static;
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+        display: block;
+    }
+
+    #searchcontainer {
+        position: absolute;
+        margin: 50% auto 0 auto;
+        width: 70%;
+        height: 40px;
+        left: 15%;
+        top: 40%;
+    }
+
+    #engine {
+        position: absolute;
+        width: 10px;
+        font-weight: bold;
+        border-radius: 10%;
+        color: white;
+        border: none;
+        margin: 0;
+        float: none;
+        left: 12%;
+        top: 55.6%;
+        animation: none;
+    }
 }

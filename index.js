@@ -23,6 +23,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const resultpopupbox = document.getElementById("resultpopupbox")
     const resultpopupwindow = document.getElementById("resultpopupwindow")
     const searchqueri = document.getElementById("hidden")
+    const inputs = document.querySelectorAll(".settinginput")
+    const engine = document.getElementById("engine")
+    const enginep = document.getElementById("enginep")
     var loadingid
     var called = false
     let shown = false
@@ -31,8 +34,8 @@ document.addEventListener("DOMContentLoaded", () => {
     let ismanual = true
     let autochangeid
     let randomimg
-    let next
-
+    let start
+    let name
 
     //====checking if new input and setting it
 
@@ -66,14 +69,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //--------initial bg change-------
 
-    document.body.style.backgroundImage = `url(img/${images[Math.floor(Math.random() * images.length)]})`
+    start = document.body.style.backgroundImage = `url(img/${images[Math.floor(Math.random() * images.length)]})`
     randomimggenerator()
+    //----taking the name of the img to compair 
+    name = start.split("/")[1];
 
     //--------------changing on click----
 
-    changebg.addEventListener("click", () => {
-        bgchanger()
-    })
+    changebg.addEventListener("click", () => { bgchanger() })
 
     //-------------checking if mouse is hovered and calling function
 
@@ -91,6 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     window.addEventListener("keydown", (event) => { event.key === "Enter" && shown ? savesetting() : null })
     window.addEventListener("keydown", (event) => { event.key === "Escape" && shown ? hidecontrollbox() : null })
+    window.addEventListener("click", (event) => { event.target === controllbox && shown ? hidecontrollbox() : null })
 
     //---------listening fo auto bg change button change
 
@@ -143,6 +147,12 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    //=========random img name picker
+
+    function randomimggenerator() {
+        randomimg = images[Math.floor(Math.random() * images.length)]
+        randomimg === name ? randomimggenerator() : null
+    }
 
     //===========function to change background image=============
 
@@ -151,11 +161,6 @@ document.addEventListener("DOMContentLoaded", () => {
         randomimggenerator()
     }
 
-    //=========random img name picker
-
-    function randomimggenerator() {
-        randomimg = images[Math.floor(Math.random() * images.length)]
-    }
 
     //-----to start the entry animation
 
@@ -181,7 +186,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function savesetting() {
         console.log("Comming on future")
-        hidecontrollbox()
+        inputs.forEach(input => input.blur());
         //=====up comming !
     }
 
@@ -202,7 +207,6 @@ document.addEventListener("DOMContentLoaded", () => {
     function autochangeoff() {
         ismanual = true
         changebg.disabled = false
-        console.log(randomimg)
         changebg.style.backgroundImage = `url(img/${randomimg})`
         changebg.style.background = "black"
         changebg.style.color = "white"
@@ -217,9 +221,9 @@ document.addEventListener("DOMContentLoaded", () => {
         changebg.style.backgroundSize = "cover"
         changebg.style.backgroundColor = " black"
         changebg.style.backgroundImage = "none"
-        changebg.style.backgroundImage = `url(img/${randomimg})`
         changebg.style.color = "transparent"
         changebg.style.cursor = "pointer"
+        changebg.style.backgroundImage = `url(img/${randomimg})`
     }
 
     //==========function to handel hover out of change btn
@@ -253,6 +257,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         })
 
+    }
+
+
+    //---for responsiveness
+
+    if (window.matchMedia("(max-width: 1000px)").matches) {
+        enginep.innerText = ">"
     }
 
     //==end of dom ====
