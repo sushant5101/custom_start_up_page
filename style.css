@@ -37,7 +37,7 @@ body {
 }
 
 #popupbox {
-    /* display: none; */
+    display: none;
     justify-items: center;
     position: fixed;
     background: rgb(1, 1, 1, 0.5);
@@ -124,7 +124,7 @@ body {
 
 
 #changebg {
-    transition: all 2s ease-in-out;
+    transition: all 3s ease-in-out;
     color: white;
     display: block;
     margin: 0 auto;
@@ -135,6 +135,7 @@ body {
     font-weight: bold;
     outline: none;
     border: none;
+    background-color: black;
 }
 
 

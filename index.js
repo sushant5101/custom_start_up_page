@@ -30,6 +30,8 @@ document.addEventListener("DOMContentLoaded", () => {
     var changebrightness = brightness.value
     let ismanual = true
     let autochangeid
+    let randomimg
+    let next
 
 
     //====checking if new input and setting it
@@ -46,16 +48,12 @@ document.addEventListener("DOMContentLoaded", () => {
         'hotairballon.webp',
         'totoro.webp',
         'water.webp',
-        'yourname.webp'
+        'yourname.webp',
+        'larntin.webp',
     ]
 
-    //setting style for the button
-    changebg.style.backgroundPosition = "center"
-    changebg.style.backgroundSize = "cover"
-    changebg.style.backgroundColor = " black"
-    changebg.style.backgroundImage = "none"
 
-    //======checking if the btn is hovered? 
+    //======checking if the btn is hovered? and is not automatic  
 
     changebg.addEventListener("mouseover", () => { ismanual ? hoverin() : null })
     changebg.addEventListener("mouseout", () => { ismanual ? hoverout() : null })
@@ -67,25 +65,32 @@ document.addEventListener("DOMContentLoaded", () => {
     })
 
     //--------initial bg change-------
-    backgroundImagechanger()
+
+    document.body.style.backgroundImage = `url(img/${images[Math.floor(Math.random() * images.length)]})`
+    randomimggenerator()
 
     //--------------changing on click----
 
-    changebg.addEventListener("click", () => { backgroundImagechanger(); })
+    changebg.addEventListener("click", () => {
+        bgchanger()
+    })
 
     //-------------checking if mouse is hovered and calling function
 
-    settingicon.addEventListener("mouseenter", () => showcontrollbox())
+    settingicon.addEventListener("mouseenter", () => shown ? null : showcontrollbox())
 
     //-------------checking if mouse is hovered and calling function
 
-    container.addEventListener("mouseleave", () => hidecontrollbox())
+    container.addEventListener("mouseleave", () => shown ? hidecontrollbox() : null)
+
+    //---------checking if the popupbox is shown and processing accordingly
+
+    window.addEventListener("click", (event) => { event.target == popupbox ? popupbox.style.display = "none" : null })
 
     //--------to check if the controll box is shown and processing accordingly
 
     window.addEventListener("keydown", (event) => { event.key === "Enter" && shown ? savesetting() : null })
     window.addEventListener("keydown", (event) => { event.key === "Escape" && shown ? hidecontrollbox() : null })
-
 
     //---------listening fo auto bg change button change
 
@@ -136,15 +141,20 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.log("something might have gone wrong")
                 break;
         }
-        console.log(engine)
     }
 
 
-    //===========bg changer func=============
+    //===========function to change background image=============
 
-    function backgroundImagechanger() {
-        const randomImage = images[Math.floor(Math.random() * images.length)]
-        document.body.style.backgroundImage = `url(img/${randomImage})`
+    function bgchanger() {
+        document.body.style.backgroundImage = `url(img/${randomimg})`
+        randomimggenerator()
+    }
+
+    //=========random img name picker
+
+    function randomimggenerator() {
+        randomimg = images[Math.floor(Math.random() * images.length)]
     }
 
     //-----to start the entry animation
@@ -184,8 +194,7 @@ document.addEventListener("DOMContentLoaded", () => {
         changebg.style.backgroundImage = "none"
         changebg.style.color = "white"
         changebg.style.cursor = "default"
-        autochangeid = setInterval(backgroundImagechanger, changeduration)
-        console.log(autochangeid)
+        autochangeid = setInterval(bgchanger, changeduration)
     }
 
     //=========function to turn of the auto change==
@@ -193,7 +202,8 @@ document.addEventListener("DOMContentLoaded", () => {
     function autochangeoff() {
         ismanual = true
         changebg.disabled = false
-        changebg.style.backgroundImage = "url(img/butterflies.webp)"
+        console.log(randomimg)
+        changebg.style.backgroundImage = `url(img/${randomimg})`
         changebg.style.background = "black"
         changebg.style.color = "white"
         clearInterval(autochangeid)
@@ -202,7 +212,12 @@ document.addEventListener("DOMContentLoaded", () => {
     //======function to handel hover of bg change btn===
 
     function hoverin() {
-        changebg.style.backgroundImage = "url(img/butterflies.webp)"
+        //setting style for the button
+        changebg.style.backgroundPosition = "center"
+        changebg.style.backgroundSize = "cover"
+        changebg.style.backgroundColor = " black"
+        changebg.style.backgroundImage = "none"
+        changebg.style.backgroundImage = `url(img/${randomimg})`
         changebg.style.color = "transparent"
         changebg.style.cursor = "pointer"
     }
