@@ -171,8 +171,8 @@ body {
 #container {
     border-radius: 10px;
     padding: 10px;
-    width: 33%;
-    height: 97%;
+    width: 27%;
+    height: 70%;
     position: relative;
     background: rgb(61, 15, 104);
     border: 2px solid white;
@@ -215,12 +215,13 @@ body {
     padding: 3px;
     font-weight: bold;
     border-radius: 4px;
+    overflow: hidden;
 }
 
 #arrow {
     font-family: sans-serif;
     position: relative;
-    top: -4.3%;
+    top: -5.3%;
     float: left;
     background-color: transparent;
     color: rgb(255, 255, 255);
@@ -237,14 +238,10 @@ body {
     border: transparent;
     width: 100%;
     height: 150px;
-    background-color: bisque;
+    background-color: rgb(202, 184, 162);
     border-radius: 4px;
-    overflow: hidden;
-}
-
-#bgimg:hover {
-    overflow-y: hidden;
     overflow-x: auto;
+    overflow-y: hidden;
 }
 
 #bgimg img {
@@ -263,15 +260,16 @@ body {
     height: 110px;
 }
 
-#imgpreview {
+#imgadd {
     position: fixed;
-    background-color: white;
+    background-color: black;
     top: 10%;
+    left: 30%;
     color: white;
-    left: 25%;
     z-index: 3;
     border-radius: 5px;
-    visibility: hidden;
+    visibility: visible;
+    width: 500px;
 }
 
 
@@ -439,7 +437,7 @@ label {
 
 /* responsiveness */
 
-@media (max-width: 1000px) {
+@media (max-width: 600px) {
 
     #main {
         background-color: transparent;

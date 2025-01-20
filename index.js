@@ -4,42 +4,43 @@ document.addEventListener("DOMContentLoaded", () => {
     const radiobutton = document.querySelectorAll('input[name=engine]')
     const user_question = document.getElementById("searchbox")
     const formdetails = document.getElementById("searchcontainer")
-    const shortcutscontainer = document.getElementById("shortcuts")
+    // const shortcutscontainer = document.getElementById("shortcuts")
     const popupbox = document.getElementById("popupbox")
-    const popupwindow = document.getElementById("popupwindow")
+    // const popupwindow = document.getElementById("popupwindow")
     const logo = document.getElementById("logo")
-    const shortname = document.getElementById("name")
-    const url = document.getElementById("url")
-    const shortlabel = document.getElementById("shortlabel")
+    // const shortname = document.getElementById("name")
+    // const url = document.getElementById("url")
+    // const shortlabel = document.getElementById("shortlabel")
     const changebg = document.getElementById("changebg")
     const settingicon = document.getElementById("settingicon")
     const container = document.getElementById("container")
     const controllbox = document.getElementById("controll")
     const auto = document.getElementById("auto")
     var duration = document.getElementById("duration")
-    var brightness = document.getElementById("brightness")
+    // var brightness = document.getElementById("brightness")
     const bgimg = document.getElementById("bgimg")
-    const imgpreview = document.getElementById("imgpreview")
-    const resultpopupbox = document.getElementById("resultpopupbox")
-    const resultpopupwindow = document.getElementById("resultpopupwindow")
+    // const imgadd = document.getElementById("imgadd")
+    // const resultpopupbox = document.getElementById("resultpopupbox")
+    // const resultpopupwindow = document.getElementById("resultpopupwindow")
     const searchqueri = document.getElementById("hidden")
     const inputs = document.querySelectorAll(".settinginput")
-    const engine = document.getElementById("engine")
+    // const engine = document.getElementById("engine")
     const enginep = document.getElementById("enginep")
     var loadingid
     var called = false
     let shown = false
     var changeduration = duration.value * 1000
-    var changebrightness = brightness.value
+    // var changebrightness = brightness.value
     let ismanual = true
     let autochangeid
     let randomimg
     let start
     let name
 
+
     //====checking if new input and setting it
 
-    duration.addEventListener("change", () => { changeduration = duration.value * 1000 })
+    duration.addEventListener("change", () => { ismanual ? null : ismanual = true; ismanual = false })
 
     //=============images to choose from===============
 
@@ -80,7 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //-------------checking if mouse is hovered and calling function
 
-    settingicon.addEventListener("mouseenter", () => shown ? null : showcontrollbox())
+    settingicon.addEventListener("click", () => shown ? hidecontrollbox() : showcontrollbox())
 
     //-------------checking if mouse is hovered and calling function
 
@@ -99,6 +100,21 @@ document.addEventListener("DOMContentLoaded", () => {
     //---------listening fo auto bg change button change
 
     auto.addEventListener("change", (event) => { event.target.checked ? autochangeon() : autochangeoff() })
+
+    //------creating a img element to add in the preview box
+
+    const add = document.createElement("img")
+    add.src = "img/add.png"
+    add.title = "Click to add your image"
+    add.style.backgroundColor = "white"
+    add.style.width = "50px"
+    add.style.height = "50px"
+    add.style.margin = "15% 0% 0% 1%"
+
+    //---------------listening if the img is clicked
+
+    // add.addEventListener("click", () => { console.log("clicked"); imgadd.style.visibility = "visible" })
+
 
     //===============function to change the search engine according to the  radiobutton change=======
 
@@ -159,6 +175,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function bgchanger() {
         document.body.style.backgroundImage = `url(img/${randomimg})`
         randomimggenerator()
+        shown ? hoverin() : null
     }
 
 
@@ -222,7 +239,7 @@ document.addEventListener("DOMContentLoaded", () => {
         changebg.style.backgroundColor = " black"
         changebg.style.backgroundImage = "none"
         changebg.style.color = "transparent"
-        changebg.style.cursor = "pointer"
+        ismanual ? changebg.style.cursor = "pointer" : changebg.style.cursor = "default"
         changebg.style.backgroundImage = `url(img/${randomimg})`
     }
 
@@ -243,28 +260,23 @@ document.addEventListener("DOMContentLoaded", () => {
             const i = document.createElement("img")
             const a = document.createElement("a")
             i.src = `img/${img}`
-
             loadingid = setInterval(i.addEventListener("load", () => {
                 i.loading = "lazy"
                 a.href = i.src
-                a.title = "click to view the image"
+                a.title = `click to view the image`
                 a.target = "_blank"
                 a.appendChild(i)
                 bgimg.appendChild(a)
             }), 1000)
 
             clearInterval(loadingid)
-
         })
+        bgimg.appendChild(add)
 
     }
 
 
-    //---for responsiveness
-
-    if (window.matchMedia("(max-width: 1000px)").matches) {
-        enginep.innerText = ">"
-    }
+    //---code to be written for responsiveness
 
     //==end of dom ====
 })

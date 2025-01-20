@@ -23,7 +23,8 @@
                 <input id="url" placeholder="Url of the page" type="text" autocomplete="off" name="url" id="url">
             </form>
             <div id="buttons"><button id="ok">Ok</button>
-                <button onclick="popupbox.style.display='none'" id="cancel">Cancel</button></div>
+                <button onclick="popupbox.style.display='none'" id="cancel">Cancel</button>
+            </div>
         </div>
     </div>
     <div id="controll">
@@ -35,15 +36,19 @@
             <hr style="margin-bottom: 10px;">
             <hr
                 style="float: left; width: 1.5px; border: none; height: 90%; background-color: white; margin-right: 5px;">
-                <button id="changebg">Change background image</button>
+            <button id="changebg">Change background image</button>
             <label for="auto">change background automatically</label>
             <input id="auto" type="checkbox" name="autochange"><br><br>
             <label for="duration">Duration for auto bg change in sec</label>
-            <input class="settinginput" type="number" max="60" min="5" name="duration" id="duration" placeholder="00" value="10"><br><br>
+            <input class="settinginput" type="number" max="60" min="5" name="duration" id="duration" placeholder="00"
+                value="10"><br><br>
             <label for="brightness">brightness of the bg image in %</label>
-            <input class="settinginput" id="brightness" min="10" max="100" step="5" type="number" placeholder="00" value="100">
+            <input class="settinginput" id="brightness" min="10" max="100" step="5" type="number" placeholder="00"
+                value="100">
             <div id="bgimg">
-                <div id="imgpreview"></div>
+                <div id="imgadd">
+                    <!-- <input type="file" id="inputimage" accept="image/*"> -->
+                </div>
             </div>
         </div>
     </div>
