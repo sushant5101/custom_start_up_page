@@ -274,7 +274,7 @@ body {
     color: white;
     z-index: 3;
     border-radius: 5px;
-    /* visibility: hidden; */
+    visibility: hidden;
     width: 100vw;
     height: 100vh;
     align-content: center;
