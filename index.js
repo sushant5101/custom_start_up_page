@@ -19,12 +19,14 @@ document.addEventListener("DOMContentLoaded", () => {
     var duration = document.getElementById("duration")
     // var brightness = document.getElementById("brightness")
     const bgimg = document.getElementById("bgimg")
-    // const imgadd = document.getElementById("imgadd")
+    const imgadd = document.getElementById("imgadd")
     const contextmenu = document.getElementById("contextmenu")
     const searchqueri = document.getElementById("hidden")
     const inputs = document.querySelectorAll(".settinginput")
     // const engine = document.getElementById("engine")
-    const enginep = document.getElementById("enginep")
+    // const enginep = document.getElementById("enginep")
+    const fileInput = document.getElementById("imagechooser")
+    const preview = document.getElementById("preview")
     var loadingid
     var called = false
     let shown = false
@@ -112,22 +114,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //---------------listening if the img is clicked
 
-    // add.addEventListener("click", () => { console.log("clicked"); imgadd.style.visibility = "visible" })
+    add.addEventListener("click", () => { imgadd.style.visibility = "visible"; hidecontrollbox() })
+    window.addEventListener("click", (event) => { event.target == imgadd ? imgadd.style.visibility = "hidden" : null })
 
     //----- custom context menu--
 
     document.addEventListener("contextmenu", (event) => {
-        // event.preventDefault();
+        event.preventDefault();
         contextmenu.style.left = event.pageX + "px";
         contextmenu.style.top = event.pageY + "px";
         contextmenu.style.display = "block"
     })
-    document.addEventListener("click", (event) => { event.preventDefault(); contextmenu.style.display = "none" })
+    document.addEventListener("click", () => { contextmenu.style.display = "none" })
 
     //-----------controls through custom sontext menu
 
     document.getElementById("menu1").addEventListener("click", () => { ismanual ? bgchanger() : null })
 
+    //-------------handeling image upload
+    fileInput.addEventListener('change', function () {
+        const file = fileInput.files[0]; // Get the first uploaded file
+
+    }
+    )
     //===============function to change the search engine according to the  radiobutton change=======
 
     function engineswitcher(engine) {

@@ -10,17 +10,24 @@
 </head>
 
 <body>
+    <div id="imgadd">
+        <div id="inputimage">
+            <input type="file" id="imagechooser" accept="image/*">
+            <p style=" position: absolute; left: 45%; padding: 1%;">preview</p>
+            <img src="" alt="" id="preview">
+        </div>
+    </div>
     <div id="contextmenu">
-<ul id="contextopt">
-    <li id="menu1">Change Background</li>
-    <li id="menu2">Blank</li>
-    <li id="menu3">Blank</li>
-    <li id="menu4">Blank</li>
-    <li id="menu5">Blank</li>
-    <li id="menu6">Blank</li>
-    <li id="menu7">Blank</li>
-    <li id="menu8">Blank</li>
-</ul>
+        <ul id="contextopt">
+            <li id="menu1">Change Background</li>
+            <li id="menu2">Blank</li>
+            <li id="menu3">Blank</li>
+            <li id="menu4">Blank</li>
+            <li id="menu5">Blank</li>
+            <li id="menu6">Blank</li>
+            <li id="menu7">Blank</li>
+            <li id="menu8">Blank</li>
+        </ul>
     </div>
 
     <div id="popupbox">
@@ -56,9 +63,6 @@
             <input class="settinginput" id="brightness" min="10" max="100" step="5" type="number" placeholder="00"
                 value="100">
             <div id="bgimg">
-                <div id="imgadd">
-                    <!-- <input type="file" id="inputimage" accept="image/*"> -->
-                </div>
             </div>
         </div>
     </div>
