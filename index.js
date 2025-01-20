@@ -20,8 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // var brightness = document.getElementById("brightness")
     const bgimg = document.getElementById("bgimg")
     // const imgadd = document.getElementById("imgadd")
-    // const resultpopupbox = document.getElementById("resultpopupbox")
-    // const resultpopupwindow = document.getElementById("resultpopupwindow")
+    const contextmenu = document.getElementById("contextmenu")
     const searchqueri = document.getElementById("hidden")
     const inputs = document.querySelectorAll(".settinginput")
     // const engine = document.getElementById("engine")
@@ -81,7 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //-------------checking if mouse is hovered and calling function
 
-    settingicon.addEventListener("click", () => shown ? hidecontrollbox() : showcontrollbox())
+    settingicon.addEventListener("click", (event) => shown ? hidecontrollbox() : showcontrollbox())
 
     //-------------checking if mouse is hovered and calling function
 
@@ -115,6 +114,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // add.addEventListener("click", () => { console.log("clicked"); imgadd.style.visibility = "visible" })
 
+    //----- custom context menu--
+
+    document.addEventListener("contextmenu", (event) => {
+        // event.preventDefault();
+        contextmenu.style.left = event.pageX + "px";
+        contextmenu.style.top = event.pageY + "px";
+        contextmenu.style.display = "block"
+    })
+    document.addEventListener("click", (event) => { event.preventDefault(); contextmenu.style.display = "none" })
+
+    //-----------controls through custom sontext menu
+
+    document.getElementById("menu1").addEventListener("click", () => { ismanual ? bgchanger() : null })
 
     //===============function to change the search engine according to the  radiobutton change=======
 
@@ -276,7 +288,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    //---code to be written for responsiveness
 
     //==end of dom ====
 })
