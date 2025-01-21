@@ -26,7 +26,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // const engine = document.getElementById("engine")
     // const enginep = document.getElementById("enginep")
     const fileInput = document.getElementById("imagechooser")
-    const preview = document.getElementById("preview")
+    const expand = document.getElementById("expand")
+    const inputimage = document.getElementById("inputimage")
+    let expanded = false
     var loadingid
     var called = false
     let shown = false
@@ -82,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //-------------checking if mouse is hovered and calling function
 
-    settingicon.addEventListener("click", (event) => shown ? hidecontrollbox() : showcontrollbox())
+    settingicon.addEventListener("click", () => shown ? hidecontrollbox() : showcontrollbox())
 
     //-------------checking if mouse is hovered and calling function
 
@@ -130,13 +132,53 @@ document.addEventListener("DOMContentLoaded", () => {
     //-----------controls through custom sontext menu
 
     document.getElementById("menu1").addEventListener("click", () => { ismanual ? bgchanger() : null })
+    document.getElementById("menu2").addEventListener("click", () => { if (shown) { hidecontrollbox(); imgadd.style.visibility = "visible" } else { imgadd.style.visibility = "visible" } })
 
     //-------------handeling image upload
     fileInput.addEventListener('change', function () {
         const file = fileInput.files[0]; // Get the first uploaded file
+        if (file) {
+            const reader = new FileReader(); // Create a FileReader instance
+
+            reader.onload = function (e) {
+                const v = document.createElement("img")
+                v.src = e.target.result
+                bgimg.appendChild(v)
+                inputimage.style.backgroundImage = `url(${e.target.result})`; // Set the preview image source
+            };
+
+
+            reader.readAsDataURL(file); // Read the file as a data URL
+        }
 
     }
     )
+
+    //----------listening for expand click
+    expand.addEventListener("click", () => expanded ? shrinker() : expander())
+
+    //===============function to make the image chooser fullscreen
+
+    function expander() {
+        inputimage.style.transition = "all .6s ease-in-out"
+        inputimage.style.width = "100vw"
+        inputimage.style.height = "100vh"
+        expand.src = "img/shrink.png"
+        expand.title = "Shrink"
+        expanded = true
+    }
+
+    //==================function to srink the image chooser to default
+
+    function shrinker() {
+        inputimage.style.transition = "all .6s ease-in-out"
+        inputimage.style.width = "70%"
+        inputimage.style.height = "70%"
+        expand.src = "img/expand.png"
+        expand.title = "Expand"
+        expanded = false
+    }
+
     //===============function to change the search engine according to the  radiobutton change=======
 
     function engineswitcher(engine) {
