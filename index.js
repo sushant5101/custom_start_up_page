@@ -29,11 +29,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const expand = document.getElementById("expand")
     const inputimage = document.getElementById("inputimage")
     const dropdown = document.getElementById("drop")
+    const slider = document.querySelector(".slider")
+    const ball = document.querySelector(".ball")
+    const toastmsg = document.getElementById("msg")
+    const toast = document.getElementById("toast")
+    let toasting = false
     let expanded = false
     var loadingid
     let isengine = false
     var called = false
     let shown = false
+    let darkmode = false
     var changeduration = duration.value * 1000
     // var changebrightness = brightness.value
     let ismanual = true
@@ -61,6 +67,45 @@ document.addEventListener("DOMContentLoaded", () => {
         'larntin.webp',
     ]
 
+    ///----
+    slider.addEventListener("click", () => {
+        if (toasting) return; // Prevent multiple triggers while toast is active
+
+        // Toast setup and animation
+        toastmsg.innerText = "Feature coming soon!!";
+        toast.style.animation = "show 1s ease-in forwards";
+        toasting = true;
+
+        // Add animationend listener for "show"
+        toast.addEventListener(
+            "animationend",
+            (event) => {
+                if (event.animationName === "show") {
+                    // Wait before hiding
+                    setTimeout(() => {
+                        toast.style.animation = "hide 1s ease-in";
+                    }, 2000); // 2-second pause before hiding
+                } else if (event.animationName === "hide") {
+                    // Reset toast and allow new clicks
+                    toasting = false;
+                }
+            }
+            // Ensures this listener runs only once
+        );
+
+        // Dark mode toggle
+        if (!darkmode) {
+            darkmode = true;
+            ball.style.float = "right";
+            slider.style.backgroundColor = "green";
+        } else if(darkmode){
+            darkmode = false;
+            slider.style.backgroundColor = "rgb(197, 53, 53)";
+            ball.style.float = "left";
+        }
+    });
+
+
 
     //======checking if the btn is hovered? and is not automatic  
 
@@ -75,7 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //----------------for the engine drop down
 
-    dropdown.addEventListener("click", () => { isengine ? riseengine() : dropengine() })
+    engine.addEventListener("click", () => { isengine ? riseengine() : dropengine() })
 
     //--------initial bg change-------
 
@@ -139,6 +184,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById("menu1").addEventListener("click", () => { ismanual ? bgchanger() : null })
     document.getElementById("menu2").addEventListener("click", () => { if (shown) { hidecontrollbox(); imgadd.style.visibility = "visible" } else { imgadd.style.visibility = "visible" } })
+    document.getElementById("menu3").addEventListener("click", () => shown ? hidecontrollbox() : showcontrollbox())
 
     //-------------handeling image upload
     fileInput.addEventListener('change', function () {
@@ -270,7 +316,6 @@ document.addEventListener("DOMContentLoaded", () => {
     //-----to start the entry animation
 
     function showcontrollbox() {
-        console.log("hi")
         container.style.animation = "entry .5s ease-in forwards"
         container.style.pointerEvents = "all"
         container.addEventListener("animationstart", () => { controllbox.style.visibility = "visible"; controllbox.style.zIndex = "3"; settingicon.style.zIndex = "5"; })
@@ -337,7 +382,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function hoverout() {
         changebg.style.color = "white"
         changebg.style.cursor = "pointer"
-        changebg.style.backgroundColor = "black"
+        changebg.style.backgroundColor = "#5a3aa3"
         changebg.style.backgroundImage = "none"
     }
 
