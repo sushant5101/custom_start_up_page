@@ -46,36 +46,39 @@
             </div>
         </div>
     </div>
+    <img src="img/setting.png" tagname="img" alt="" id="settingicon">
     <div id="controll">
         <br>
-        <img src="img/setting.png" tagname="img" alt="" id="settingicon">
         <div id="container">
-            <span id="arrow">^</span>
             <h4 style="color: white;">Settings</h4>
             <hr style="margin-bottom: 10px;">
             <hr
                 style="float: left; width: 1.5px; border: none; height: 90%; background-color: white; margin-right: 5px;">
             <button id="changebg">Change background image</button>
-            <label for="auto">change background automatically</label>
-            <input id="auto" type="checkbox" name="autochange"><br><br>
-            <label for="duration">Duration for auto bg change in sec</label>
+            <label for="auto">Change background automatically</label>
+            <input id="auto" type="checkbox" name="autochange">
+            <label for="duration">Duration for auto bg change in sec
+            </label>
             <input class="settinginput" type="number" max="60" min="5" name="duration" id="duration" placeholder="00"
-                value="10"><br><br>
-            <label for="brightness">brightness of the bg image in %</label>
+                value="10">
+            <label for="brightness">Brightness of the bg image in %</label>
             <input class="settinginput" id="brightness" min="10" max="100" step="5" type="number" placeholder="00"
                 value="100">
+            <label for="darkmode"> Dark mode</label>
+            <input type="range" name="darkmode" min="0" max="1" id="darkmode">
             <div id="bgimg">
             </div>
         </div>
     </div>
     <div id="main">
         <form target="_blank" id="searchcontainer" action="https://www.google.com/search" method="get">
-            <input type="text" name="q" id="searchbox" autocomplete="off" placeholder="Search through google...">
+            <input type="text" focus name="q" id="searchbox" autocomplete="off" placeholder="Search through google...">
             <input type="hidden" name="" value="" id="hidden"><img id="logo" loading="lazy" src="img/google.png" alt="">
             <button id="searchbtn" type="submit"><img src="img/searchicon.png" alt=""></button>
         </form><br>
+
         <div id="engine">
-            <p id="enginep">Search engine's</p>
+            <p id="enginep">Engine's <img id="drop" src="img/drop.png" alt=""></p>
             <input id="google" checked type="radio" name="engine" value="google">
             <label for="google">Google<br></label>
             <input id="wikipedia" type="radio" name="engine" value="wikipedia">
@@ -84,14 +87,14 @@
             <label for="bing">Microsoft Bing<br></label>
             <input id="duckduckgo" type="radio" name="engine" value="duckduckgo">
             <label for="duckduckgo">DuckDuckGo<br></label>
-        </div>
+            <!-- </div>
         <div id="shortcuts">
             <div id="box"><span onclick="popupbox.style.display = 'block'" id="add">+<p id="shortlabel">Add</p></span>
             </div>
+        </div> -->
         </div>
-    </div>
 
-    <script src="index.js"></script>
+        <script src="index.js"></script>
 </body>
 
 </html>

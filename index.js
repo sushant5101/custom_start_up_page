@@ -23,13 +23,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const contextmenu = document.getElementById("contextmenu")
     const searchqueri = document.getElementById("hidden")
     const inputs = document.querySelectorAll(".settinginput")
-    // const engine = document.getElementById("engine")
+    const engine = document.getElementById("engine")
     // const enginep = document.getElementById("enginep")
     const fileInput = document.getElementById("imagechooser")
     const expand = document.getElementById("expand")
     const inputimage = document.getElementById("inputimage")
+    const dropdown = document.getElementById("drop")
     let expanded = false
     var loadingid
+    let isengine = false
     var called = false
     let shown = false
     var changeduration = duration.value * 1000
@@ -70,6 +72,10 @@ document.addEventListener("DOMContentLoaded", () => {
     radiobutton.forEach(radio => {
         radio.addEventListener("change", () => { engineswitcher(radio.value) })
     })
+
+    //----------------for the engine drop down
+
+    dropdown.addEventListener("click", () => { isengine ? riseengine() : dropengine() })
 
     //--------initial bg change-------
 
@@ -156,6 +162,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //----------listening for expand click
     expand.addEventListener("click", () => expanded ? shrinker() : expander())
+
+
+    //========function to show engine drop down
+
+    function dropengine() {
+        engine.style.animation = "drop .3s ease-out forwards";
+        dropdown.style.transition = " all .5s ease-in"
+        dropdown.style.transform = " rotate(180deg)";
+        isengine = true
+    }
+
+    //==========function to hide engine drop down
+
+    function riseengine() {
+        engine.style.animation = "rise .3s ease-out forwards";
+        isengine = false;
+        dropdown.style.transition = " all .5s ease-in"
+        dropdown.style.transform = " rotate(0deg)"
+    }
 
     //===============function to make the image chooser fullscreen
 
@@ -245,9 +270,10 @@ document.addEventListener("DOMContentLoaded", () => {
     //-----to start the entry animation
 
     function showcontrollbox() {
+        console.log("hi")
         container.style.animation = "entry .5s ease-in forwards"
         container.style.pointerEvents = "all"
-        container.addEventListener("animationstart", () => controllbox.style.zIndex = "3")
+        container.addEventListener("animationstart", () => { controllbox.style.visibility = "visible"; controllbox.style.zIndex = "3"; settingicon.style.zIndex = "5"; })
         container.addEventListener("animationend", (event) => { if (event.animationName === "entry" && !called) { load() } })
         shown = true
     }
@@ -258,7 +284,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function hidecontrollbox() {
         container.style.pointerEvents = "none"
         container.style.animation = "leave .5s ease-in "
-        container.addEventListener("animationend", (event) => { if (event.animationName === 'leave') { controllbox.style.zIndex = "1" } })
+        container.addEventListener("animationend", (event) => { if (event.animationName === 'leave') { controllbox.style.visibility = "hidden"; controllbox.style.zIndex = "0"; settingicon.style.zIndex = "0"; } })
         shown = false
     }
 
