@@ -69,28 +69,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
     ///----
     slider.addEventListener("click", () => {
-        if (toasting) return; // Prevent multiple triggers while toast is active
+        if (toasting) return;
 
-        // Toast setup and animation
         toastmsg.innerText = "Feature coming soon!!";
         toast.style.animation = "show 1s ease-in forwards";
         toasting = true;
 
-        // Add animationend listener for "show"
         toast.addEventListener(
             "animationend",
             (event) => {
                 if (event.animationName === "show") {
-                    // Wait before hiding
                     setTimeout(() => {
                         toast.style.animation = "hide 1s ease-in";
-                    }, 2000); // 2-second pause before hiding
+                    }, 2000);
                 } else if (event.animationName === "hide") {
-                    // Reset toast and allow new clicks
                     toasting = false;
                 }
             }
-            // Ensures this listener runs only once
         );
 
         // Dark mode toggle
@@ -98,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
             darkmode = true;
             ball.style.float = "right";
             slider.style.backgroundColor = "green";
-        } else if(darkmode){
+        } else if (darkmode) {
             darkmode = false;
             slider.style.backgroundColor = "rgb(197, 53, 53)";
             ball.style.float = "left";
