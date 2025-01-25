@@ -417,14 +417,13 @@ body {
 }
 
 #main {
-    /* overflow: hidden; */
     position: sticky;
     display: flex;
     justify-content: center;
     background-color: rgb(256, 256, 256, .6);
-    width: 80%;
-    height: 10%;
-    margin: 10% auto;
+    width: 80vw;
+    height: 10vh;
+    margin: 20vh auto;
     border-radius: 10px;
     padding: 20px;
 }
@@ -434,7 +433,7 @@ body {
     margin: 3px;
     background-color: white;
     display: flex;
-    height: 76%;
+    height: 64%;
     width: 50%;
     border-radius: 30px;
     border: 1.6px solid gray;
@@ -516,9 +515,59 @@ body {
     float: inline-end;
 }
 
+#shortcuts {
+    width: 80vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    background-color: rgb(256, 256, 256, .6);
+    border-radius: 10px;
+    padding: 20px;
+}
+
+#box p img {
+    border-radius: 30%;
+    cursor: pointer;
+    transition: all .3s ease-in;
+    border: 2px solid transparent;
+}
+
+#box p img:hover {
+    transition: all .3s ease-in;
+    background-color: rgb(256, 256, 256);
+    border: 2px solid teal;
+}
+
+footer{
+    background-color:#007bff;
+    background: linear-gradient(180deg, #0ad4db, #a781ec);
+    position: fixed;
+    bottom:0vh;
+    display: block;
+    width: 100vw;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 70%;
+}
+
+footer p{
+    display: inline-block;
+    padding-bottom: .3%;
+}
+
+footer p img{
+    transform: rotate(-90deg);
+    width: 5%;
+}
+
+footer p a:visited{
+    color: purple;
+}
+
 /*for responsiveness */
 
-@media (max-width: 600px) {
+/* @media (max-width: 680px) {
 
     #main {
         background-color: transparent;
@@ -552,4 +601,4 @@ body {
         top: 55.6%;
         animation: none;
     }
-}
+} */
