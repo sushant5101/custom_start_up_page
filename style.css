@@ -50,7 +50,7 @@ body {
     position: fixed;
     height: 30px;
     border-radius: 20px;
-    top: -10%;
+    top: -20%;
     left: 47%;
     font-family: sans-serif;
     animation: none;
@@ -98,8 +98,8 @@ body {
     height: 30vh;
     overflow: hidden;
     background-color: black;
-    top: 30%;
-    left: 50;
+    top: 30vh;
+    left: 33vw;
     position: relative;
     border-radius: 5px;
 }
@@ -118,7 +118,7 @@ body {
     border-radius: 5px;
     outline: none;
     padding: 1px;
-    font-size: medium;
+    font-size: small;
     font-weight: 700;
     width: 50%;
     height: 4vh;
@@ -526,11 +526,13 @@ body {
     padding: 20px;
 }
 
+
 #box p img {
-    border-radius: 30%;
+    border-radius: 10%;
     cursor: pointer;
     transition: all .3s ease-in;
     border: 2px solid transparent;
+    height: 100%;
 }
 
 #box p img:hover {
@@ -539,11 +541,11 @@ body {
     border: 2px solid teal;
 }
 
-footer{
-    background-color:#007bff;
+footer {
+    background-color: #007bff;
     background: linear-gradient(180deg, #0ad4db, #a781ec);
     position: fixed;
-    bottom:0vh;
+    bottom: 0vh;
     display: block;
     width: 100vw;
     text-align: center;
@@ -551,54 +553,16 @@ footer{
     font-size: 70%;
 }
 
-footer p{
+footer p {
     display: inline-block;
     padding-bottom: .3%;
 }
 
-footer p img{
+footer p img {
     transform: rotate(-90deg);
     width: 5%;
 }
 
-footer p a:visited{
+footer p a:visited {
     color: purple;
 }
-
-/*for responsiveness */
-
-/* @media (max-width: 680px) {
-
-    #main {
-        background-color: transparent;
-        position: static;
-        margin: 0;
-        padding: 0;
-        height: 100%;
-        width: 100%;
-        display: block;
-    }
-
-    #searchcontainer {
-        position: absolute;
-        margin: 50% auto 0 auto;
-        width: 70%;
-        height: 40px;
-        left: 15%;
-        top: 40%;
-    }
-
-    #engine {
-        position: absolute;
-        width: 10px;
-        font-weight: bold;
-        border-radius: 10%;
-        color: white;
-        border: none;
-        margin: 0;
-        float: none;
-        left: 12%;
-        top: 55.6%;
-        animation: none;
-    }
-} */

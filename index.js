@@ -8,8 +8,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const popupbox = document.getElementById("popupbox")
     // const popupwindow = document.getElementById("popupwindow")
     const logo = document.getElementById("logo")
-    // const shortname = document.getElementById("name")
-    // const url = document.getElementById("url")
+    const shortname = document.getElementById("name")
+    const url = document.getElementById("url")
+    const ok = document.getElementById("ok")
     // const shortlabel = document.getElementById("shortlabel")
     const changebg = document.getElementById("changebg")
     const settingicon = document.getElementById("settingicon")
@@ -33,6 +34,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const ball = document.querySelector(".ball")
     const toastmsg = document.getElementById("msg")
     const toast = document.getElementById("toast")
+    const shortadd = document.getElementById("shortadd")
+    const shortcuts = document.getElementById("shortcuts")
+    let adding = false
     let toasting = false
     let expanded = false
     var loadingid
@@ -40,13 +44,49 @@ document.addEventListener("DOMContentLoaded", () => {
     var called = false
     let shown = false
     let darkmode = false
-    var changeduration = duration.value * 1000
     // var changebrightness = brightness.value
     let ismanual = true
     let autochangeid
     let randomimg
     let start
     let name
+
+    //===============Storing the settings and retriving
+
+    if (localStorage.getItem("changeduration")) {
+        duration.value = localStorage.getItem("changeduration")
+    }
+
+    if (localStorage.getItem("ismanual")) {
+        if (localStorage.getItem("ismanual")) {
+            ismanual = true
+            autochangeoff()
+        } else if (localStorage.getItem("ismanual")) {
+            ismanual = false
+            autochangeon()
+        }
+    }
+
+
+
+    //=============function to create new short cut according to the input
+
+    ok.addEventListener("click", () => { addshortcut() })
+
+    window.addEventListener("keydown", (event) => { event.key == "Enter" && adding ? addshortcut() : null })
+
+
+    function addshortcut() {
+
+        if (shortname.value !== "" && url.value !== "") {
+
+            popupbox.style.display = "none"
+
+        } else {
+            alert("fill all the details")
+        }
+
+    }
 
 
     //====checking if new input and setting it
@@ -135,6 +175,10 @@ document.addEventListener("DOMContentLoaded", () => {
     //-------------checking if mouse is hovered and calling function
 
     container.addEventListener("mouseleave", () => shown ? hidecontrollbox() : null)
+
+    //-------------checkin if add shortcuts is clicked ?
+
+    shortadd.addEventListener("click", () => { popupbox.style.display = "block"; shortname.value = ""; shortname.focus(); adding = true })
 
     //---------checking if the popupbox is shown and processing accordingly
 
@@ -322,6 +366,7 @@ document.addEventListener("DOMContentLoaded", () => {
     //-----to start the leave animation
 
     function hidecontrollbox() {
+        savesetting()
         container.style.pointerEvents = "none"
         container.style.animation = "leave .5s ease-in "
         container.addEventListener("animationend", (event) => { if (event.animationName === 'leave') { controllbox.style.visibility = "hidden"; controllbox.style.zIndex = "0"; settingicon.style.zIndex = "0"; } })
@@ -331,26 +376,31 @@ document.addEventListener("DOMContentLoaded", () => {
     //==========function to save the setting=====
 
     function savesetting() {
+        ismanual ? null : setTimeout(() => { autochangeoff(); setTimeout(() => { autochangeon() }, 100) }, 100)
         console.log("Comming on future")
+        localStorage.setItem("changeduration", `${duration.value}`)
+        localStorage.setItem("ismanual", `${ismanual}`)
         inputs.forEach(input => input.blur());
-        //=====up comming !
+
     }
 
     //===========function to change bg preodicaly and control the side effects===
 
     function autochangeon() {
+        auto.checked = true
         ismanual = false
         changebg.disabled = true
         changebg.style.backgroundColor = "gray"
         changebg.style.backgroundImage = "none"
         changebg.style.color = "white"
         changebg.style.cursor = "default"
-        autochangeid = setInterval(bgchanger, changeduration)
+        autochangeid = setInterval(() => { bgchanger() }, duration.value * 1000)
     }
 
     //=========function to turn of the auto change==
 
     function autochangeoff() {
+        auto.checked = false
         ismanual = true
         changebg.disabled = false
         changebg.style.backgroundImage = `url(img/${randomimg})`
