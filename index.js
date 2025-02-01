@@ -2,9 +2,11 @@
 document.addEventListener("DOMContentLoaded", () => {
 
     const radiobutton = document.querySelectorAll('input[name=engine]')
+    const main = document.getElementById("main")
     const user_question = document.getElementById("searchbox")
     const formdetails = document.getElementById("searchcontainer")
     // const shortcutscontainer = document.getElementById("shortcuts")
+    const searchimg = document.getElementById("searchimg")
     const popupbox = document.getElementById("popupbox")
     // const popupwindow = document.getElementById("popupwindow")
     const logo = document.getElementById("logo")
@@ -51,19 +53,35 @@ document.addEventListener("DOMContentLoaded", () => {
     let start
     let name
 
-    //===============Storing the settings and retriving
+    //===============retriving the settings  
 
     if (localStorage.getItem("changeduration")) {
         duration.value = localStorage.getItem("changeduration")
     }
 
-    if (localStorage.getItem("ismanual")) {
-        console.log(`${localStorage.getItem("ismanual")}`)
-        autochangeon()
-    } else if (!localStorage.getItem("ismanual")) {
-        autochangeoff()
+    if (localStorage.getItem("engine")) {
+        engineswitcher(`${localStorage.getItem("engine")}`)
+        radiobutton.forEach(radio => {
+            if (radio.value === `${localStorage.getItem("engine")}`) {
+                radio.checked = true
+                return
+            }
+        })
+    } else if (!localStorage.getItem("engine")) {
+        engineswitcher(google)
     }
 
+    if (localStorage.getItem("ismanual")) {
+        autochangeoff()
+    } else if (!localStorage.getItem("ismanual")) {
+        autochangeon()
+    }
+
+    if (localStorage.getItem("darkmode")) {
+        Dark_mode()
+    } else if (!localStorage.getItem("darkmode")) {
+        Light_mode()
+    }
 
 
     //=============function to create new short cut according to the input
@@ -106,38 +124,49 @@ document.addEventListener("DOMContentLoaded", () => {
 
     ///----
     slider.addEventListener("click", () => {
-        if (toasting) return;
+        // if (toasting) return;
 
-        toastmsg.innerText = "Feature coming soon!!";
-        toast.style.animation = "show 1s ease-in forwards";
-        toasting = true;
+        // toastmsg.innerText = "Feature coming soon!! (being developed";
+        // toast.style.animation = "show 1s ease-in forwards";
+        // toasting = true;
 
-        toast.addEventListener(
-            "animationend",
-            (event) => {
-                if (event.animationName === "show") {
-                    setTimeout(() => {
-                        toast.style.animation = "hide 1s ease-in";
-                    }, 2000);
-                } else if (event.animationName === "hide") {
-                    toasting = false;
-                }
-            }
-        );
+        // toast.addEventListener(
+        //     "animationend",
+        //     (event) => {
+        //         if (event.animationName === "show") {
+        //             setTimeout(() => {
+        //                 toast.style.animation = "hide 1s ease-in";
+        //             }, 2000);
+        //         } else if (event.animationName === "hide") {
+        //             toasting = false;
+        //         }
+        //     }
+        // );
 
         // Dark mode toggle
-        if (!darkmode) {
-            darkmode = true;
-            ball.style.float = "right";
-            slider.style.backgroundColor = "green";
-        } else if (darkmode) {
-            darkmode = false;
-            slider.style.backgroundColor = "rgb(197, 53, 53)";
-            ball.style.float = "left";
-        }
+        darkmode ? Light_mode() : Dark_mode()
     });
 
 
+    //==============function for dark mode turned no
+
+    function Dark_mode() {
+        darkmode = true;
+        ball.style.float = "right";
+        slider.style.backgroundColor = "green";
+        document.body.classList.toggle("dark-mode")
+        searchimg.src = "img/light_search.png"
+    }
+
+    //==============function for dark mode turned off / light mode
+
+    function Light_mode() {
+        darkmode = false;
+        slider.style.backgroundColor = "rgb(170, 40, 40)";
+        document.body.classList.toggle("dark-mode")
+        ball.style.float = "left";
+        searchimg.src = "img/dark_search.png"
+    }
 
     //======checking if the btn is hovered? and is not automatic  
 
@@ -290,6 +319,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function engineswitcher(engine) {
         logo.loading = "lazy"
+        savesetting(engine)
         switch (engine) {
             case 'google':
                 logo.src = "img/google.png"
@@ -372,11 +402,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //==========function to save the setting=====
 
-    function savesetting() {
+    function savesetting(engine) {
         ismanual ? null : setTimeout(() => { autochangeoff(); setTimeout(() => { autochangeon() }, 100) }, 100)
         console.log("Comming on future")
         localStorage.setItem("changeduration", `${duration.value}`)
         localStorage.setItem("ismanual", `${ismanual}`)
+        localStorage.setItem("darkmode", `${darkmode}`)
+        localStorage.setItem("engine", `${engine}`)
         inputs.forEach(input => input.blur());
 
     }

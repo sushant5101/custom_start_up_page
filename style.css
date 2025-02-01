@@ -3,6 +3,39 @@
     padding: 0;
 }
 
+:root {
+    /* for dark filter */
+    --dark-filter-bg-color: transparent;
+
+    /* for container */
+    --container-bg-color: #e8def8;
+    --container-box-shadow: 6px 6px 10px 5px black;
+
+    /* for bg img */
+    --bgimg-bg-color: #d3b3f3;
+
+    /* for main container */
+    --main-bg-color: rgb(256, 256, 256, .6);
+
+
+}
+
+.dark-mode {
+    /* for dark filter */
+    --dark-filter-bg-color: rgb(0, 0, 0, .4);
+
+    /* for container */
+    --container-bg-color: black;
+    --container-text-color: white;
+
+    /* for bg img */
+    --bgimg-bg-color: #372e3f;
+
+    /* for main container */
+    --main-bg-color: rgba(0, 0, 0, 0.6);
+    --main-text-color: rgb(197, 196, 196);
+}
+
 body {
     transition: all 2s ease-in-out;
     height: 100vh;
@@ -13,6 +46,15 @@ body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+}
+
+#darkfilter {
+    transition: all 1s ease-in-out;
+    background-color: var(--dark-filter-bg-color);
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
 }
 
 
@@ -214,14 +256,16 @@ body {
 }
 
 #container {
+    transition: all 1s ease-in;
     border-radius: 10px;
     padding: 10px;
     width: 25vw;
     position: relative;
-    background-color: #e8def8;
+    background-color: var(--container-bg-color);
+    color: var(--container-text-color);
     border: 5px solid #a082d9;
     text-align: left;
-    box-shadow: 6px 6px 10px 5px black;
+    box-shadow: var(--container-box-shadow);
     top: 5%;
     left: -100%;
     /* animation: name duration timing-function delay iteration-count direction fill-mode; */
@@ -306,11 +350,12 @@ body {
 }
 
 #bgimg {
+    transition: all 1s ease-in;
     margin-top: 20px;
     display: flex;
     left: 1%;
     border: transparent;
-    background-color: #d3b3f3;
+    background-color: var(--bgimg-bg-color);
     border-radius: 4px;
     overflow-x: auto;
     overflow-y: hidden;
@@ -419,10 +464,12 @@ body {
 }
 
 #main {
+    transition: all 1s ease-in;
     position: sticky;
     display: flex;
     justify-content: center;
-    background-color: rgb(256, 256, 256, .6);
+    background-color: var(--main-bg-color);
+    color: var(--main-text-color);
     width: 80vw;
     height: 10vh;
     margin: 20vh auto;
@@ -430,29 +477,34 @@ body {
     padding: 20px;
 }
 
+
 #searchcontainer {
+    transition: all 1s ease-in;
     z-index: 1;
     margin: 3px;
-    background-color: white;
+    background-color: var(--main-bg-color);
     display: flex;
     height: 64%;
     width: 50%;
     border-radius: 30px;
-    border: 1.6px solid gray;
+    border: 2px solid rgb(151, 151, 151);
     overflow: hidden;
 }
 
 #logo {
-    background-color: white;
+    background:linear-gradient(to right, transparent,var(--main-text-color),transparent);
     cursor: pointer;
 }
 
 #searchbox {
+    transition: all 1s ease-in;
+    color: var(--main-text-color);
     padding-left: 10px;
     font-family: sans-serif;
     font-size: large;
-    background-color: white;
+    background-color: transparent;
     outline: none;
+    border: none;
     border: none;
     height: 100%;
     width: 80%;
@@ -461,24 +513,25 @@ body {
 #searchbtn {
     cursor: pointer;
     border: none;
-    background-color: white;
+    background-color: transparent;
     height: 100%;
-    width: 10%;
+    width: 15%;
 }
 
 #searchbtn:hover {
-    background-color: rgb(240, 240, 240);
+    background-color: rgb(104, 103, 103);
 }
 
 #engine {
+    transition: all 1s ease-in;
     cursor: pointer;
     overflow: hidden;
-    background-color: rgb(256, 256, 256, .6);
+    background-color: var(--main-bg-color);
     height: 20px;
     margin: 5px;
     padding: 4px 4px 0px 4px;
     border-radius: 5px;
-    border: 2px solid white;
+    border: 2px solid rgb(160, 158, 158);
     font-weight: 700;
 }
 
@@ -518,12 +571,14 @@ body {
 }
 
 #shortcuts {
+    transition: all 1s ease-in;
     width: 80vw;
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 0 auto;
-    background-color: rgb(256, 256, 256, .6);
+    background-color: var(--main-bg-color);
+    color: var(--main-text-color);
     border-radius: 10px;
     padding: 20px;
 }
@@ -532,9 +587,10 @@ body {
 #box p img {
     border-radius: 10%;
     cursor: pointer;
-    transition: all .3s ease-in;
+    transition: all 1s ease-in;
     border: 2px solid transparent;
     height: 100%;
+    background-color: var(--main-text-color);
 }
 
 #box p img:hover {

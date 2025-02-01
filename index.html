@@ -10,6 +10,7 @@
 </head>
 
 <body>
+    <div id="darkfilter"></div>
     <div id="toast">
         <p id="msg"></p>
     </div>
@@ -60,7 +61,7 @@
             <label for="brightness">Brightness of the bg image in %</label>
             <input class="settinginput" id="brightness" min="10" max="100" step="5" type="number" placeholder="00"
                 value="100">
-            <label id="darkmode" for="darkmode"> Dark mode</label><input id="darkmodedummy" type="checkbox">
+            <label id="darkmode" for="darkmode"> Dark mode</label>
             <span class="slider"><span class="ball"></span></span>
             <div id="bgimg">
             </div>
@@ -70,7 +71,7 @@
         <form target="_blank" id="searchcontainer" action="https://www.google.com/search" method="get">
             <input type="text" focus name="q" id="searchbox" autocomplete="off" placeholder="Search through google...">
             <input type="hidden" name="" value="" id="hidden"><img id="logo" loading="lazy" src="img/google.png" alt="">
-            <button id="searchbtn" type="submit"><img src="img/searchicon.png" alt=""></button>
+            <button id="searchbtn" type="submit"><img id="searchimg" src="img/dark_search.png" alt=""></button>
         </form><br>
 
         <div id="engine">
