@@ -58,13 +58,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (localStorage.getItem("ismanual")) {
-        if (localStorage.getItem("ismanual")) {
-            ismanual = true
-            autochangeoff()
-        } else if (localStorage.getItem("ismanual")) {
-            ismanual = false
-            autochangeon()
-        }
+        console.log(`${localStorage.getItem("ismanual")}`)
+        autochangeon()
+    } else if (!localStorage.getItem("ismanual")) {
+        autochangeoff()
     }
 
 
@@ -202,7 +199,7 @@ document.addEventListener("DOMContentLoaded", () => {
     add.style.backgroundColor = "white"
     add.style.width = "50px"
     add.style.height = "50px"
-    add.style.margin = "15% 0% 0% 1%"
+    add.style.margin = "8% 0"
 
     //---------------listening if the img is clicked
 
