@@ -37,6 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // const shortcuts = document.getElementById("shortcuts")
     const darkmodelabel = document.getElementById("darkmode")
     let adding = false
+    let was = false
     let expanded = false
     var loadingid
     let isengine = false
@@ -70,15 +71,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (`${localStorage.getItem("ismanual")}` === "true") {
         autochangeoff()
-    } else {
+    } else if (`${localStorage.getItem("ismanual")}` === "false") {
         autochangeon()
     }
 
     if (`${localStorage.getItem("darkmode")}` === "true") {
         Dark_mode()
-    } else {
+    } else if (`${localStorage.getItem("darkmode")}` === "false") {
         Light_mode()
     }
+
+    //============for stopping the slideshow of bg img if user leaves the page
+
+    document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === "hidden" && !ismanual) {
+            autochangeoff()
+            was = true
+        } else if (document.visibilityState === "visible" && was) {
+            autochangeon()
+            was = false
+        }
+    })
+
 
     //=============function to create new short cut according to the input
 
@@ -340,7 +354,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.log("something might have gone wrong")
                 break;
         }
-        localStorage.setItem("engine", `${engine}`)
+        if (engine.length <= 10) {
+            localStorage.setItem("engine", `${engine}`)
+        }
     }
 
     //=========random img name picker
