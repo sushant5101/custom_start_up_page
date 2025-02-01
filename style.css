@@ -492,7 +492,7 @@ body {
 }
 
 #logo {
-    background:linear-gradient(to right, transparent,var(--main-text-color),transparent);
+    background: linear-gradient(to right, transparent, var(--main-text-color), transparent);
     cursor: pointer;
 }
 
@@ -568,6 +568,8 @@ body {
     cursor: pointer;
     width: 20px;
     float: inline-end;
+    background-color: var(--main-text-color);
+    border-radius: 50px;
 }
 
 #shortcuts {

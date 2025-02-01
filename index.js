@@ -2,7 +2,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
     const radiobutton = document.querySelectorAll('input[name=engine]')
-    const main = document.getElementById("main")
     const user_question = document.getElementById("searchbox")
     const formdetails = document.getElementById("searchcontainer")
     // const shortcutscontainer = document.getElementById("shortcuts")
@@ -34,12 +33,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const dropdown = document.getElementById("drop")
     const slider = document.querySelector(".slider")
     const ball = document.querySelector(".ball")
-    const toastmsg = document.getElementById("msg")
-    const toast = document.getElementById("toast")
     const shortadd = document.getElementById("shortadd")
-    const shortcuts = document.getElementById("shortcuts")
+    // const shortcuts = document.getElementById("shortcuts")
+    const darkmodelabel = document.getElementById("darkmode")
     let adding = false
-    let toasting = false
     let expanded = false
     var loadingid
     let isengine = false
@@ -60,9 +57,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (localStorage.getItem("engine")) {
-        engineswitcher(`${localStorage.getItem("engine")}`)
         radiobutton.forEach(radio => {
-            if (radio.value === `${localStorage.getItem("engine")}`) {
+            if (radio.value === `${localStorage.getItem("engine")}` && localStorage.getItem("engine") !== undefined) {
+                engineswitcher(`${localStorage.getItem("engine")}`)
                 radio.checked = true
                 return
             }
@@ -71,18 +68,17 @@ document.addEventListener("DOMContentLoaded", () => {
         engineswitcher(google)
     }
 
-    if (localStorage.getItem("ismanual")) {
+    if (`${localStorage.getItem("ismanual")}` === "true") {
         autochangeoff()
-    } else if (!localStorage.getItem("ismanual")) {
+    } else {
         autochangeon()
     }
 
-    if (localStorage.getItem("darkmode")) {
+    if (`${localStorage.getItem("darkmode")}` === "true") {
         Dark_mode()
-    } else if (!localStorage.getItem("darkmode")) {
+    } else {
         Light_mode()
     }
-
 
     //=============function to create new short cut according to the input
 
@@ -122,27 +118,11 @@ document.addEventListener("DOMContentLoaded", () => {
         'larntin.webp',
     ]
 
-    ///----
+    ///----for toggeling dark mode
+
+    darkmodelabel.addEventListener("click", () => darkmode ? Light_mode() : Dark_mode())
+
     slider.addEventListener("click", () => {
-        // if (toasting) return;
-
-        // toastmsg.innerText = "Feature coming soon!! (being developed";
-        // toast.style.animation = "show 1s ease-in forwards";
-        // toasting = true;
-
-        // toast.addEventListener(
-        //     "animationend",
-        //     (event) => {
-        //         if (event.animationName === "show") {
-        //             setTimeout(() => {
-        //                 toast.style.animation = "hide 1s ease-in";
-        //             }, 2000);
-        //         } else if (event.animationName === "hide") {
-        //             toasting = false;
-        //         }
-        //     }
-        // );
-
         // Dark mode toggle
         darkmode ? Light_mode() : Dark_mode()
     });
@@ -163,7 +143,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function Light_mode() {
         darkmode = false;
         slider.style.backgroundColor = "rgb(170, 40, 40)";
-        document.body.classList.toggle("dark-mode")
+        document.body.classList.remove("dark-mode")
         ball.style.float = "left";
         searchimg.src = "img/dark_search.png"
     }
@@ -319,7 +299,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function engineswitcher(engine) {
         logo.loading = "lazy"
-        savesetting(engine)
         switch (engine) {
             case 'google':
                 logo.src = "img/google.png"
@@ -361,6 +340,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.log("something might have gone wrong")
                 break;
         }
+        localStorage.setItem("engine", `${engine}`)
     }
 
     //=========random img name picker
@@ -402,13 +382,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //==========function to save the setting=====
 
-    function savesetting(engine) {
+    function savesetting() {
         ismanual ? null : setTimeout(() => { autochangeoff(); setTimeout(() => { autochangeon() }, 100) }, 100)
         console.log("Comming on future")
         localStorage.setItem("changeduration", `${duration.value}`)
-        localStorage.setItem("ismanual", `${ismanual}`)
-        localStorage.setItem("darkmode", `${darkmode}`)
-        localStorage.setItem("engine", `${engine}`)
+        localStorage.setItem("ismanual", ismanual)
+        localStorage.setItem("darkmode", darkmode)
         inputs.forEach(input => input.blur());
 
     }
