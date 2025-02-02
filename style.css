@@ -18,6 +18,7 @@
     --main-bg-color: rgb(256, 256, 256, .6);
 
 
+
 }
 
 .dark-mode {
@@ -34,6 +35,9 @@
     /* for main container */
     --main-bg-color: rgba(0, 0, 0, 0.6);
     --main-text-color: rgb(197, 196, 196);
+
+    /* for hover mainly for searchbtn */
+    --hover-bg-color: rgb(70, 68, 68);
 }
 
 body {
@@ -491,6 +495,25 @@ body {
     overflow: hidden;
 }
 
+#clearsearchvalue {
+    background-color: rgba(117, 117, 117, 0.603);
+    display: none;
+    padding: 3px;
+    height: 50%;
+    width: 4%;
+    text-align: center;
+    border-radius: 50px;
+    position: relative;
+    top: 13%;
+    left: 1%;
+    transition: all .5s ease-in;
+}
+
+#clearsearchvalue:hover {
+    cursor: pointer;
+    background-color: rgba(97, 96, 96, 0.699);
+}
+
 #logo {
     background: linear-gradient(to right, transparent, var(--main-text-color), transparent);
     cursor: pointer;
@@ -519,7 +542,7 @@ body {
 }
 
 #searchbtn:hover {
-    background-color: rgb(104, 103, 103);
+    background-color: var(--hover-bg-color);
 }
 
 #engine {

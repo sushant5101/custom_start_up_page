@@ -36,10 +36,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const shortadd = document.getElementById("shortadd")
     // const shortcuts = document.getElementById("shortcuts")
     const darkmodelabel = document.getElementById("darkmode")
+    const toastmsg = document.getElementById("msg")
+    const toast = document.getElementById("toast")
+    const clearsearchvalue = document.getElementById("clearsearchvalue")
+    let toasting = false
     let adding = false
     let was = false
     let expanded = false
-    var loadingid
     let isengine = false
     var called = false
     let shown = false
@@ -50,6 +53,29 @@ document.addEventListener("DOMContentLoaded", () => {
     let randomimg
     let start
     let name
+
+    //-----focuussing to  the main search box for easer reach
+
+    setTimeout(() => { user_question.focus() }, 100)
+
+    user_question.addEventListener("focus", () => {
+        clearsearchvalue.style.display = "block"
+    })
+
+    user_question.addEventListener("blur", () => {
+        if (user_question.value !== "") {
+            return
+        }
+        clearsearchvalue.style.display = "none"
+    })
+
+    //-----clearing the value if clicked
+
+    clearsearchvalue.addEventListener("click", () => {
+        user_question.value = ""
+        setTimeout(() => { user_question.focus() }, 1)
+        setTimeout(() => { user_question.blur() }, 1)
+    })
 
     //===============retriving the settings  
 
@@ -98,7 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     ok.addEventListener("click", () => { addshortcut() })
 
-    window.addEventListener("keydown", (event) => { event.key == "Enter" && adding ? addshortcut() : null })
+    window.addEventListener("keydown", (event) => { event.key == "Enter" && adding == true ? addshortcut() : null })
 
 
     function addshortcut() {
@@ -108,11 +134,19 @@ document.addEventListener("DOMContentLoaded", () => {
             popupbox.style.display = "none"
 
         } else {
-            alert("fill all the details")
+            if (toasting) return
+
+            toasting = true
+            toastmsg.innerText = "Fill in the details"
+            toast.style.animation = "show 1s ease-in forwards"
+            setTimeout(() => { toast.style.animation = "hide 1s ease-out" }, 3000)
         }
 
     }
 
+    //-------------checking if the msg is being shown or not
+
+    toast.addEventListener("animationend", (event) => { event.animationName == "hide" ? toasting = false : null })
 
     //====checking if new input and setting it
 
@@ -148,7 +182,7 @@ document.addEventListener("DOMContentLoaded", () => {
         darkmode = true;
         ball.style.float = "right";
         slider.style.backgroundColor = "green";
-        document.body.classList.toggle("dark-mode")
+        document.body.classList.add("dark-mode")
         searchimg.src = "img/light_search.png"
     }
 
@@ -463,16 +497,15 @@ document.addEventListener("DOMContentLoaded", () => {
             const i = document.createElement("img")
             const a = document.createElement("a")
             i.src = `img/${img}`
-            loadingid = setInterval(i.addEventListener("load", () => {
+            setTimeout(i.addEventListener("load", () => {
                 i.loading = "lazy"
                 a.href = i.src
                 a.title = `click to view the image`
                 a.target = "_blank"
                 a.appendChild(i)
                 bgimg.appendChild(a)
-            }), 1000)
+            }), 10)
 
-            clearInterval(loadingid)
         })
         bgimg.appendChild(add)
 
