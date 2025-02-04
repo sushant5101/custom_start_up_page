@@ -240,7 +240,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //--------to check if the controll box is shown and processing accordingly
 
-    window.addEventListener("keydown", (event) => { event.key === "Enter" && shown ? savesetting() : null })
+    // window.addEventListener("keydown", (event) => { event.key === "Enter" && shown ? savesetting() : null })
     window.addEventListener("keydown", (event) => { event.key === "Escape" && shown ? hidecontrollbox() : null })
     window.addEventListener("click", (event) => { event.target === controllbox && shown ? hidecontrollbox() : null })
 
@@ -273,7 +273,7 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     document.addEventListener("click", () => { contextmenu.style.display = "none" })
 
-    //-----------controls through custom sontext menu
+    //-----------controls through custom context menu
 
     document.getElementById("menu1").addEventListener("click", () => { ismanual ? bgchanger() : null })
     document.getElementById("menu2").addEventListener("click", () => { if (shown) { hidecontrollbox(); imgadd.style.visibility = "visible" } else { imgadd.style.visibility = "visible" } })
@@ -300,8 +300,8 @@ document.addEventListener("DOMContentLoaded", () => {
     )
 
     //----------listening for expand click
-    expand.addEventListener("click", () => expanded ? shrinker() : expander())
 
+    expand.addEventListener("click", () => expanded ? shrinker() : expander())
 
     //========function to show engine drop down
 
@@ -493,21 +493,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function load() {
         called = true
+        bgimg.appendChild(add)
         images.forEach(img => {
             const i = document.createElement("img")
             const a = document.createElement("a")
+            i.loading = "lazy"
+            a.href = i.src
+            a.title = `click to view the image`
+            a.target = "_blank"
+            bgimg.appendChild(a)
+            a.appendChild(i)
             i.src = `img/${img}`
-            setTimeout(i.addEventListener("load", () => {
-                i.loading = "lazy"
-                a.href = i.src
-                a.title = `click to view the image`
-                a.target = "_blank"
-                a.appendChild(i)
-                bgimg.appendChild(a)
-            }), 10)
-
         })
-        bgimg.appendChild(add)
 
     }
 
