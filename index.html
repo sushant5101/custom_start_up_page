@@ -50,19 +50,29 @@
         <br>
         <div id="container">
             <h4>Settings</h4>
+            <span id="closesetting">
+                <p>X</p>
+            </span>
             <hr style="margin-bottom: 10px;">
             <button id="changebg">Change background image</button>
-            <label for="auto">Change background automatically</label>
-            <input id="auto" type="checkbox" name="autochange">
-            <label for="duration">Duration for auto bg change in sec
-            </label>
-            <input class="settinginput" type="number" max="60" min="5" name="duration" id="duration" placeholder="00"
-                value="10">
-            <label for="brightness">Brightness of the bg image in %</label>
-            <input class="settinginput" id="brightness" min="10" max="100" step="5" type="number" placeholder="00"
-                value="100">
-            <label id="darkmode" for="darkmode"> Dark mode</label>
-            <span class="slider"><span class="ball"></span></span>
+            <div class="content">
+                <label for="auto">Change background automatically</label>
+                <input id="auto" type="checkbox" name="autochange">
+            </div>
+            <div class="content">
+                <label for="duration">Duration for auto bg change in sec</label>
+                <input class="settinginput" type="number" max="60" min="5" name="duration" id="duration"
+                    placeholder="00" value="10">
+            </div>
+            <div class="content">
+                <label for="brightness">Brightness of the bg image in %</label>
+                <input class="settinginput" id="brightness" min="10" max="100" step="5" type="number" placeholder="00"
+                    value="100">
+            </div>
+            <div class="content">
+                <label id="darkmode" for="darkmode"> Dark mode</label>
+                <div class="slider"><span class="ball"></span></div>
+            </div>
             <div id="bgimg">
             </div>
         </div>

@@ -22,3 +22,11 @@ While clicking on Settings on the context menu or on the icon on the top left co
 Addition of thing to the page since jan 25 2025:
 
 added a footer for different navigation like a Feedback/question,About the page,and a source code link that lead to the github repo of this page. And some other minor changes.
+
+02/06/2025
+
+changed some ui behaviour .
+completed dark and light mode.
+![darkmode](images/darkmode.png)
+
+most are good remaining to add responsiveness

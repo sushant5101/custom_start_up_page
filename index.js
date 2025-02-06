@@ -39,6 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const toastmsg = document.getElementById("msg")
     const toast = document.getElementById("toast")
     const clearsearchvalue = document.getElementById("clearsearchvalue")
+    const closesetting = document.getElementById("closesetting")
     let toasting = false
     let adding = false
     let was = false
@@ -54,7 +55,12 @@ document.addEventListener("DOMContentLoaded", () => {
     let start
     let name
 
-    //-----focuussing to  the main search box for easer reach
+
+    //-------------for closing setting
+
+    closesetting.addEventListener("click", () => { hidecontrollbox() })
+
+    //-----focussing to  the main search box for easer reach
 
     setTimeout(() => { user_question.focus() }, 100)
 
@@ -85,14 +91,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (localStorage.getItem("engine")) {
         radiobutton.forEach(radio => {
-            if (radio.value === `${localStorage.getItem("engine")}` && localStorage.getItem("engine") !== undefined) {
+            if (radio.value == `${localStorage.getItem("engine")}` && localStorage.getItem("engine") !== undefined) {
                 engineswitcher(`${localStorage.getItem("engine")}`)
                 radio.checked = true
                 return
             }
         })
     } else if (!localStorage.getItem("engine")) {
-        engineswitcher(google)
+        engineswitcher("google")
     }
 
     if (`${localStorage.getItem("ismanual")}` === "true") {
@@ -388,6 +394,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.log("something might have gone wrong")
                 break;
         }
+        riseengine()
         if (engine.length <= 10) {
             localStorage.setItem("engine", `${engine}`)
         }
@@ -434,7 +441,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function savesetting() {
         ismanual ? null : setTimeout(() => { autochangeoff(); setTimeout(() => { autochangeon() }, 100) }, 100)
-        console.log("Comming on future")
         localStorage.setItem("changeduration", `${duration.value}`)
         localStorage.setItem("ismanual", ismanual)
         localStorage.setItem("darkmode", darkmode)
@@ -497,13 +503,13 @@ document.addEventListener("DOMContentLoaded", () => {
         images.forEach(img => {
             const i = document.createElement("img")
             const a = document.createElement("a")
-            i.loading = "lazy"
-            a.href = i.src
-            a.title = `click to view the image`
-            a.target = "_blank"
             bgimg.appendChild(a)
             a.appendChild(i)
+            a.title = `click to view the image`
+            a.target = "_blank"
+            i.loading = "lazy"
             i.src = `img/${img}`
+            a.href = i.src
         })
 
     }

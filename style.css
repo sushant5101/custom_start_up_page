@@ -261,8 +261,7 @@ body {
     transition: all 1s ease-in;
     border-radius: 10px;
     padding: 10px;
-    width: 25vw;
-    max-width: 720px;
+    width: 25%;
     position: relative;
     background-color: var(--container-bg-color);
     color: var(--container-text-color);
@@ -299,28 +298,31 @@ body {
 
 }
 
+#closesetting {
+    visibility: hidden;
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+    border: 1px;
+    padding: 4px 0 0 0;
+    border-style: none none solid none;
+}
+
 #container input {
-    float: right;
     border: none;
     outline: none;
-    width: 38px;
     padding: 3px;
     font-weight: bold;
     border-radius: 4px;
     overflow: hidden;
     margin-top: 9px;
-    display: block;
+    display: inline-block;
 }
 
 #container label {
-    display: inline-block;
-    margin: 10px;
     cursor: pointer;
-}
-
-#darkmode {
-    width: 80%;
-    float: left;
 }
 
 #darkmodedummy {
@@ -331,22 +333,19 @@ body {
 }
 
 .slider {
-    display: inline-block;
+    margin-top: 10px;
     background-color: rgb(197, 53, 53);
     width: 36px;
     height: 20px;
     border: 2px solid black;
     cursor: pointer;
     border-radius: 40px;
-    overflow: hidden;
-    align-items: self-start;
 }
 
 .ball {
-    margin-top: 1.5px;
-    display: block;
+    float: left;
     width: 53%;
-    height: 90%;
+    height: 100%;
     border-radius: 50%;
     background-color: rgb(0, 29, 71);
     box-shadow: 0px 0px 3px 2px black;
@@ -370,7 +369,6 @@ body {
     border-radius: 5px;
     width: 189px;
     height: 100%;
-    position: relative;
     border: none;
     cursor: pointer;
     box-shadow: 0px 0px 10px 2px black;
@@ -475,6 +473,7 @@ body {
     color: var(--main-text-color);
     width: 80vw;
     height: 10vh;
+    max-height: 100px;
     margin: 20vh auto;
     border-radius: 10px;
     padding: 20px;
@@ -487,7 +486,8 @@ body {
     margin: 3px;
     background-color: var(--main-bg-color);
     display: flex;
-    height: 64%;
+    height: 62%;
+    max-height: 44px;
     width: 50%;
     border-radius: 30px;
     border: 2px solid rgb(151, 151, 151);
@@ -648,4 +648,44 @@ footer p img {
 
 footer p a:visited {
     color: purple;
+}
+
+/*for responsiveness */
+
+@media (max-width: 600px) {
+    #container {
+        font-style: normal;
+        font-size: 40px;
+        width: 90vw;
+        max-width: 380px;
+    }
+
+    #container h4 {
+        display: inline-block;
+    }
+
+    #closesetting p {
+        border: 2px solid;
+        text-align: center;
+        display: inline;
+        padding: 5px;
+    }
+
+    #closesetting {
+        cursor: pointer;
+        visibility: visible;
+        border-radius: 50%;
+        float: right;
+        border: 2px solid;
+        font-size: 25px;
+        text-align: center;
+        overflow: hidden;
+    }
+
+    #container input {
+        height: 30px;
+        width: 30px;
+        margin-right: 5px;
+    }
+
 }
