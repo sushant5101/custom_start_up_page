@@ -51,7 +51,7 @@
         <div id="container">
             <h4>Settings</h4>
             <span id="closesetting">
-                <p>X</p>
+                <p>x</p>
             </span>
             <hr style="margin-bottom: 10px;">
             <button id="changebg">Change background image</button>
@@ -65,9 +65,13 @@
                     placeholder="00" value="10">
             </div>
             <div class="content">
-                <label for="brightness">Brightness of the bg image in %</label>
-                <input class="settinginput" id="brightness" min="10" max="100" step="5" type="number" placeholder="00"
+                <label for="bgbrightness">Brightness of the background image in %</label>
+                <input class="settinginput" id="bgbrightness" min="10" max="100" step="5" type="number" placeholder="00"
                     value="100">
+            </div>
+            <div class="content">
+                <label for="fgbrightness">Brightness of the foreground element in %</label>
+                <input disabled class="settinginput" id="fgbrightness" min="10" max="100" step="5" type="number" placeholder="00" value="100">
             </div>
             <div class="content">
                 <label id="darkmode" for="darkmode"> Dark mode</label>
@@ -79,7 +83,9 @@
     </div>
     <div id="main">
         <form target="_blank" id="searchcontainer" action="https://www.google.com/search" method="get">
-            <p id="clearsearchvalue">x</p>
+            <span id="clearsearchvalue">
+                <p>x</p>
+            </span>
             <input type="text" name="q" id="searchbox" autocomplete="off" placeholder="Search through google...">
             <input type="hidden" name="" value="" id="hidden"><img id="logo" loading="lazy" src="img/google.png" alt="">
             <button id="searchbtn" type="submit"><img id="searchimg" src="img/dark_search.png" alt=""></button>

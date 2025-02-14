@@ -19,7 +19,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const controllbox = document.getElementById("controll")
     const auto = document.getElementById("auto")
     var duration = document.getElementById("duration")
-    // var brightness = document.getElementById("brightness")
+    var bgbrightness = document.getElementById("bgbrightness")
+    var fgbrightness = document.getElementById("fgbrightness")
     const bgimg = document.getElementById("bgimg")
     const imgadd = document.getElementById("imgadd")
     const contextmenu = document.getElementById("contextmenu")
@@ -40,6 +41,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const toast = document.getElementById("toast")
     const clearsearchvalue = document.getElementById("clearsearchvalue")
     const closesetting = document.getElementById("closesetting")
+    const darkfilter = document.getElementById("darkfilter")
+    const preloader = document.createElement("link")
     let toasting = false
     let adding = false
     let was = false
@@ -48,7 +51,6 @@ document.addEventListener("DOMContentLoaded", () => {
     var called = false
     let shown = false
     let darkmode = false
-    // var changebrightness = brightness.value
     let ismanual = true
     let autochangeid
     let randomimg
@@ -66,9 +68,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     user_question.addEventListener("focus", () => {
         clearsearchvalue.style.display = "block"
+        formdetails.style.borderColor = "rgb(90, 90, 228)"
     })
 
     user_question.addEventListener("blur", () => {
+        formdetails.style.borderColor = "rgb(151, 151, 151)"
         if (user_question.value !== "") {
             return
         }
@@ -88,6 +92,12 @@ document.addEventListener("DOMContentLoaded", () => {
     if (localStorage.getItem("changeduration")) {
         duration.value = localStorage.getItem("changeduration")
     }
+
+    if (localStorage.getItem("bgbrightness")) {
+        bgbrightness.value = localStorage.getItem("bgbrightness")
+        darkfilter.style.filter = ` brightness(${bgbrightness.value / 100})`
+    }
+
 
     if (localStorage.getItem("engine")) {
         radiobutton.forEach(radio => {
@@ -154,10 +164,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     toast.addEventListener("animationend", (event) => { event.animationName == "hide" ? toasting = false : null })
 
-    //====checking if new input and setting it
-
-    duration.addEventListener("change", () => { ismanual ? null : ismanual = true; ismanual = false })
-
     //=============images to choose from===============
 
     const images = [
@@ -219,7 +225,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //--------initial bg change-------
 
-    start = document.body.style.backgroundImage = `url(img/${images[Math.floor(Math.random() * images.length)]})`
+    start = darkfilter.style.backgroundImage = `url(img/${images[Math.floor(Math.random() * images.length)]})`
     randomimggenerator()
     //----taking the name of the img to compair 
     name = start.split("/")[1];
@@ -410,8 +416,13 @@ document.addEventListener("DOMContentLoaded", () => {
     //===========function to change background image=============
 
     function bgchanger() {
-        document.body.style.backgroundImage = `url(img/${randomimg})`
+        document.body.style.transition = "all .7s ease-in"
+        darkfilter.style.backgroundImage = `url(img/${randomimg})`
         randomimggenerator()
+        preloader.rel = "preload"
+        preloader.href = `img/${randomimg}`
+        preloader.as = "image"
+        document.head.appendChild(preloader)
         shown ? hoverin() : null
     }
 
@@ -419,7 +430,7 @@ document.addEventListener("DOMContentLoaded", () => {
     //-----to start the entry animation
 
     function showcontrollbox() {
-        container.style.animation = "entry .5s ease-in forwards"
+        container.style.animation = "entry .3s ease-in forwards"
         container.style.pointerEvents = "all"
         container.addEventListener("animationstart", () => { controllbox.style.visibility = "visible"; controllbox.style.zIndex = "3"; settingicon.style.zIndex = "5"; })
         container.addEventListener("animationend", (event) => { if (event.animationName === "entry" && !called) { load() } })
@@ -432,7 +443,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function hidecontrollbox() {
         savesetting()
         container.style.pointerEvents = "none"
-        container.style.animation = "leave .5s ease-in "
+        container.style.animation = "leave .3s ease-out "
         container.addEventListener("animationend", (event) => { if (event.animationName === 'leave') { controllbox.style.visibility = "hidden"; controllbox.style.zIndex = "0"; settingicon.style.zIndex = "0"; } })
         shown = false
     }
@@ -440,10 +451,12 @@ document.addEventListener("DOMContentLoaded", () => {
     //==========function to save the setting=====
 
     function savesetting() {
-        ismanual ? null : setTimeout(() => { autochangeoff(); setTimeout(() => { autochangeon() }, 100) }, 100)
-        localStorage.setItem("changeduration", `${duration.value}`)
-        localStorage.setItem("ismanual", ismanual)
-        localStorage.setItem("darkmode", darkmode)
+        ismanual ? null : setTimeout(() => { autochangeoff(); setTimeout(() => { autochangeon() }, 1) }, 1)
+        localStorage.getItem("bgbrightness") !== bgbrightness.value ? darkfilter.style.filter = ` brightness(${bgbrightness.value / 100})` : null
+        localStorage.getItem("changeduration") !== duration.value ? localStorage.setItem("changeduration", `${duration.value}`) : null
+        localStorage.getItem("ismanual") !== `${ismanual}` ? localStorage.setItem("ismanual", ismanual) : null
+        localStorage.getItem("darkmode") !== `${darkmode}` ? localStorage.setItem("darkmode", darkmode) : null
+        localStorage.getItem("bgbrightness") !== bgbrightness.value ? localStorage.setItem("bgbrightness", bgbrightness.value) : null
         inputs.forEach(input => input.blur());
 
     }

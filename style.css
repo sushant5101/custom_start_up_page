@@ -1,6 +1,10 @@
 * {
     margin: 0;
     padding: 0;
+    -webkit-font-smoothing: antialiased;
+    /* Chrome, Safari */
+    -moz-osx-font-smoothing: grayscale;
+    /* Firefox */
 }
 
 :root {
@@ -21,7 +25,7 @@
 
 .dark-mode {
     /* for dark filter */
-    --dark-filter-bg-color: rgb(0, 0, 0, .4);
+    --dark-filter-bg-color: black;
 
     /* for container */
     --container-bg-color: black;
@@ -44,21 +48,19 @@ body {
     overflow: hidden;
     background-color: black;
     font-family: sans-serif;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    transition: all 2s ease-in-out;
+    transition: all 1s ease;
 }
 
 #darkfilter {
-    transition: all 1s ease-in-out;
-    background-color: var(--dark-filter-bg-color);
-    position: fixed;
+    /* background-color:var(--dark-filter-bg-color); */
     width: 100vw;
     height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: fixed;
     z-index: -1;
 }
-
 
 #contextmenu {
     display: none;
@@ -217,6 +219,7 @@ body {
     color: white;
     display: block;
     margin: 0 auto;
+    height: 2.7rem;
     width: 50%;
     padding: 2% 0%;
     border-radius: 4px;
@@ -225,6 +228,9 @@ body {
     outline: none;
     border: none;
     background-color: #6c47c6;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 
@@ -262,6 +268,7 @@ body {
     border-radius: 10px;
     padding: 10px;
     width: 25%;
+    min-width: 400px;
     position: relative;
     background-color: var(--container-bg-color);
     color: var(--container-text-color);
@@ -269,30 +276,39 @@ body {
     text-align: left;
     box-shadow: var(--container-box-shadow);
     top: 5%;
-    left: -100%;
+    transform: scale(0);
+    margin: 0 auto;
     /* animation: name duration timing-function delay iteration-count direction fill-mode; */
 }
 
 @keyframes entry {
     0% {
-        left: -100%;
+        transform: scale(0);
         opacity: 0;
     }
 
+    50% {
+        transform: scale(.5);
+    }
+
     100% {
-        left: 0%;
+        transform: scale(1);
         opacity: 1;
     }
 }
 
 @keyframes leave {
     0% {
-        left: 0%;
         opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(.5);
     }
 
     100% {
-        left: -100%;
+        transform: scale(0);
         opacity: 0;
     }
 
@@ -317,6 +333,8 @@ body {
     font-weight: bold;
     border-radius: 4px;
     overflow: hidden;
+    width: 45px;
+    height: 15px;
     margin-top: 9px;
     display: inline-block;
 }
@@ -481,7 +499,7 @@ body {
 
 
 #searchcontainer {
-    transition: all 1s ease-in;
+    transition: all .3s ease-in;
     z-index: 1;
     margin: 3px;
     background-color: var(--main-bg-color);
@@ -497,20 +515,19 @@ body {
 #clearsearchvalue {
     background-color: rgba(117, 117, 117, 0.603);
     display: none;
-    padding: 3px;
-    height: 50%;
-    width: 4%;
+    height: 100%;
+    width: 12%;
     text-align: center;
-    border-radius: 50px;
-    position: relative;
-    top: 13%;
-    left: 1%;
     transition: all .5s ease-in;
 }
 
 #clearsearchvalue:hover {
     cursor: pointer;
     background-color: rgba(97, 96, 96, 0.699);
+}
+
+#clearsearchvalue p {
+    margin-top: 1vh;
 }
 
 #logo {
@@ -653,19 +670,18 @@ footer p a:visited {
 /*for responsiveness */
 
 @media (max-width: 600px) {
-    #container {
-        font-style: normal;
-        font-size: 40px;
-        width: 90vw;
-        max-width: 380px;
-    }
+    /* #container {
+            font-style: normal;
+            font-size: 40px;
+            width: 90vw;
+            max-width: 380px;
+        } */
 
     #container h4 {
         display: inline-block;
     }
 
     #closesetting p {
-        border: 2px solid;
         text-align: center;
         display: inline;
         padding: 5px;
@@ -676,15 +692,13 @@ footer p a:visited {
         visibility: visible;
         border-radius: 50%;
         float: right;
-        border: 2px solid;
         font-size: 25px;
         text-align: center;
         overflow: hidden;
     }
 
     #container input {
-        height: 30px;
-        width: 30px;
+        width: 23px;
         margin-right: 5px;
     }
 
