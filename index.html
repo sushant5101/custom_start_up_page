@@ -28,6 +28,7 @@
             <li id="menu1">Change Background</li>
             <li id="menu2">Add Images</li>
             <li id="menu3">Settings</li>
+            <li id="menu4">Help</li>
         </ul>
     </div>
 
@@ -41,41 +42,62 @@
                 <input id="url" placeholder="Url of the page" type="text" autocomplete="off" name="url" id="url">
             </form>
             <div id="buttons"><button id="ok">Ok</button>
-                <button onclick="popupbox.style.display='none'" id="cancel">Cancel</button>
+                <button onclick="popupbox.style.display= 'none'" id="cancel">Cancel</button>
             </div>
         </div>
     </div>
+
     <img src="img/setting.png" tagname="img" alt="" id="settingicon">
+    <img onclick="helpwindow.style.display = 'block' " src="img/help.png" id="help">
+
+    <div id="helpwindow">
+        <div id="helpcontent">
+            <h3>Use full tips</h3>
+            <button id="exithelp" type="button">x</button>
+            <hr>
+            <div class="help_content">
+                <p>You can navigate easily by right clicking anywhere on the page</p>
+                <p>While hovering or while auto change is on the image on the background changer button shows the next image
+                </p>
+            </div>
+        </div>
+    </div>
+
     <div id="controll">
         <br>
         <div id="container">
             <h4>Settings</h4>
             <span id="closesetting">
-                <p>x</p>
+                <p id="close">x</p>
             </span>
             <hr style="margin-bottom: 10px;">
             <button id="changebg">Change background image</button>
-            <div class="content">
+            <div class="setting_content">
                 <label for="auto">Change background automatically</label>
                 <input id="auto" type="checkbox" name="autochange">
             </div>
-            <div class="content">
+            <div class="setting_content">
                 <label for="duration">Duration for auto bg change in sec</label>
                 <input class="settinginput" type="number" max="60" min="5" name="duration" id="duration"
                     placeholder="00" value="10">
             </div>
-            <div class="content">
+            <div class="setting_content">
                 <label for="bgbrightness">Brightness of the background image in %</label>
                 <input class="settinginput" id="bgbrightness" min="10" max="100" step="5" type="number" placeholder="00"
                     value="100">
             </div>
-            <div class="content">
+            <div class="setting_content">
                 <label for="fgbrightness">Brightness of the foreground element in %</label>
-                <input disabled class="settinginput" id="fgbrightness" min="10" max="100" step="5" type="number" placeholder="00" value="100">
+                <input disabled class="settinginput" id="fgbrightness" min="10" max="100" step="5" type="number"
+                    placeholder="00" value="100">
             </div>
-            <div class="content">
+            <div class="setting_content">
                 <label id="darkmode" for="darkmode"> Dark mode</label>
                 <div class="slider"><span class="ball"></span></div>
+            </div>
+            <div class="setting_content">
+                <label id="settingreset" for="defaultsettings"> Restor default setting</label>
+                <img id="defaultsettings" src="img/reset.png" alt="">
             </div>
             <div id="bgimg">
             </div>

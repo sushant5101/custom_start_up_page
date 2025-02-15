@@ -4,15 +4,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const radiobutton = document.querySelectorAll('input[name=engine]')
     const user_question = document.getElementById("searchbox")
     const formdetails = document.getElementById("searchcontainer")
-    // const shortcutscontainer = document.getElementById("shortcuts")
     const searchimg = document.getElementById("searchimg")
     const popupbox = document.getElementById("popupbox")
-    // const popupwindow = document.getElementById("popupwindow")
     const logo = document.getElementById("logo")
     const shortname = document.getElementById("name")
     const url = document.getElementById("url")
     const ok = document.getElementById("ok")
-    // const shortlabel = document.getElementById("shortlabel")
     const changebg = document.getElementById("changebg")
     const settingicon = document.getElementById("settingicon")
     const container = document.getElementById("container")
@@ -27,7 +24,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const searchqueri = document.getElementById("hidden")
     const inputs = document.querySelectorAll(".settinginput")
     const engine = document.getElementById("engine")
-    // const enginep = document.getElementById("enginep")
     const fileInput = document.getElementById("imagechooser")
     const expand = document.getElementById("expand")
     const inputimage = document.getElementById("inputimage")
@@ -35,14 +31,27 @@ document.addEventListener("DOMContentLoaded", () => {
     const slider = document.querySelector(".slider")
     const ball = document.querySelector(".ball")
     const shortadd = document.getElementById("shortadd")
-    // const shortcuts = document.getElementById("shortcuts")
     const darkmodelabel = document.getElementById("darkmode")
     const toastmsg = document.getElementById("msg")
     const toast = document.getElementById("toast")
     const clearsearchvalue = document.getElementById("clearsearchvalue")
+    const close = document.getElementById("close")
     const closesetting = document.getElementById("closesetting")
     const darkfilter = document.getElementById("darkfilter")
+    const helpicon = document.getElementById("help")
+    const helpwindow = document.getElementById("helpwindow")
+    const helpcontent = document.getElementById("helpcontent")
+    const exithelp = document.getElementById("exithelp")
+    const defaultsettings = document.getElementById("defaultsettings")
+    const cloned = helpicon.cloneNode(true)
     const preloader = document.createElement("link")
+    const default_setting = {
+        darkmode: false,
+        ismanual: true,
+        bgbrightness: 100,
+        fgbrightness: 100,
+        bgchangeduration: 10,
+    }
     let toasting = false
     let adding = false
     let was = false
@@ -58,11 +67,53 @@ document.addEventListener("DOMContentLoaded", () => {
     let name
 
 
+    //---hiding the help menu while clicking x 
+
+    exithelp.addEventListener("click", () => {
+        helpwindow.style.display = "none"
+    })
+
+
+
+
+    //---checking if user wants to reset the setting or not
+
+    defaultsettings.addEventListener("click", () => {
+
+        ismanual = default_setting.ismanual
+        darkmode = default_setting.darkmode
+        bgbrightness.value = default_setting.bgbrightness
+        fgbrightness.value = default_setting.fgbrightness
+        duration.value = default_setting.bgchangeduration
+
+        savesetting()
+
+        defaultsettings.addEventListener("animationend", (event) => {
+            if (event.animationName == "rotate") {
+                defaultsettings.style.animation = ""
+            }
+        })
+        defaultsettings.style.animation = "rotate 2s ease-in"
+    })
+
+    //--showing the help menu 
+
+    window.addEventListener("keydown", (event) => {
+        console.log(event.key)
+        if (event.key === "/" || event.key === "?" || event.key === "F2") {
+            helpwindow.style.display = "block"
+        }
+    })
+
+    //----adding help icon for help menu access on where needed by apendeing it
+
+    closesetting.appendChild(cloned)
+
     //-------------for closing setting
 
-    closesetting.addEventListener("click", () => { hidecontrollbox() })
+    close.addEventListener("click", () => { hidecontrollbox() })
 
-    //-----focussing to  the main search box for easer reach
+    //-----focussing to  the main search box for easier reach
 
     setTimeout(() => { user_question.focus() }, 100)
 
@@ -264,7 +315,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const add = document.createElement("img")
     add.src = "img/add.png"
-    add.title = "Click to add your image"
+    add.title = "Add your image"
     add.style.backgroundColor = "white"
     add.style.width = "50px"
     add.style.height = "50px"
@@ -373,7 +424,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 logo.src = "img/wikipedia.png"
                 formdetails.action = "https://en.wikipedia.org/w/index.php"
                 user_question.name = "search"
-                user_question.placeholder = "search through wikipedia page..."
+                user_question.placeholder = "Search through wiki pages..."
                 searchqueri.name = "title"
                 searchqueri.value = "Special:Search"
                 break
@@ -416,7 +467,7 @@ document.addEventListener("DOMContentLoaded", () => {
     //===========function to change background image=============
 
     function bgchanger() {
-        document.body.style.transition = "all .7s ease-in"
+        document.body.style.transition = "all 1s ease-in-out"
         darkfilter.style.backgroundImage = `url(img/${randomimg})`
         randomimggenerator()
         preloader.rel = "preload"
@@ -432,7 +483,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function showcontrollbox() {
         container.style.animation = "entry .3s ease-in forwards"
         container.style.pointerEvents = "all"
-        container.addEventListener("animationstart", () => { controllbox.style.visibility = "visible"; controllbox.style.zIndex = "3"; settingicon.style.zIndex = "5"; })
+        container.addEventListener("animationstart", () => { controllbox.style.visibility = "visible"; })
         container.addEventListener("animationend", (event) => { if (event.animationName === "entry" && !called) { load() } })
         shown = true
     }
@@ -444,7 +495,7 @@ document.addEventListener("DOMContentLoaded", () => {
         savesetting()
         container.style.pointerEvents = "none"
         container.style.animation = "leave .3s ease-out "
-        container.addEventListener("animationend", (event) => { if (event.animationName === 'leave') { controllbox.style.visibility = "hidden"; controllbox.style.zIndex = "0"; settingicon.style.zIndex = "0"; } })
+        container.addEventListener("animationend", (event) => { if (event.animationName === 'leave') { controllbox.style.visibility = "hidden"; } })
         shown = false
     }
 
@@ -471,7 +522,7 @@ document.addEventListener("DOMContentLoaded", () => {
         changebg.style.backgroundImage = "none"
         changebg.style.color = "white"
         changebg.style.cursor = "default"
-        autochangeid = setInterval(() => { bgchanger() }, duration.value * 1000)
+        autochangeid = setInterval(() => { ismanual ? autochangeoff() : bgchanger() }, duration.value * 1000)
     }
 
     //=========function to turn of the auto change==
